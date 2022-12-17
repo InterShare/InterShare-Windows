@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "InterShare-Windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "InterShare-Windows (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
