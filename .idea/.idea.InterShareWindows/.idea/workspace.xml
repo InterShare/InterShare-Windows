@@ -11,7 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Migrate to .net 8">
+    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Added Drag &amp; Drop Zone">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
     </list>
@@ -31,8 +31,10 @@
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/TestService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/huefn/RiderProjects/InterShare-Windows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/huefn/RiderProjects/InterShare-Windows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/huefn/RiderProjects/InterShare-Windows/InterShareWindows/Views/MainPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/huefn/RiderProjects/InterShare-Windows/InterShareWindows/Views/MainPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -136,7 +138,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708030796003</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Drag &amp; Drop Zone">
+      <option name="closed" value="true" />
+      <created>1708033734152</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708033734152</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +157,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Page should be frame of MainWindow" />
     <MESSAGE value="Migrate to .net 8" />
-    <option name="LAST_COMMIT_MESSAGE" value="Migrate to .net 8" />
+    <MESSAGE value="Added Drag &amp; Drop Zone" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Drag &amp; Drop Zone" />
   </component>
 </project>
