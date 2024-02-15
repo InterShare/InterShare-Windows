@@ -11,8 +11,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Top buttons send file and settings">
+    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Implemented file picker when sending file">
+      <change afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/SettingsViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Services/ITestService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml.cs" afterDir="false" />
@@ -26,15 +32,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/bf5e279d9239bfef5bb1b8d6212f1b971c434606/src/coreclr/System.Private.CoreLib/src/System/Threading/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/477b4e826ead4ecf86f19cf2ddbb4649c8f910/75/235b0671/COMException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/IPageService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/ITestService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/TestService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/obj/x64/Debug/net6.0-windows10.0.19041.0/win10-x64/XamlTypeInfo.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/obj/x64/Debug/net8.0-windows10.0.19041.0/win10-x64/App.g.i.cs" root0="SKIP_HIGHLIGHTING" />
@@ -57,7 +63,7 @@
     ".NET Launch Settings Profile.InterShareWindows: InterShareWindows (Unpackaged).executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UWP.InterShareWindows.executor": "Run",
+    "UWP.InterShareWindows.executor": "Debug",
     "XThreadsFramesViewSplitterKey": "0.2649494",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
@@ -121,7 +127,7 @@
       <updated>1706617845330</updated>
       <workItem from="1706617848137" duration="5108000" />
       <workItem from="1708030204196" duration="396000" />
-      <workItem from="1708030615021" duration="4721000" />
+      <workItem from="1708030615021" duration="6669000" />
     </task>
     <task id="LOCAL-00001" summary="Page should be frame of MainWindow">
       <option name="closed" value="true" />
@@ -147,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708032010535</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Implemented file picker when sending file">
+      <option name="closed" value="true" />
+      <created>1708035449597</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708035449597</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,23 +173,24 @@
     <MESSAGE value="Page should be frame of MainWindow" />
     <MESSAGE value="Migrate to .net 8" />
     <MESSAGE value="Top buttons send file and settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Top buttons send file and settings" />
+    <MESSAGE value="Implemented file picker when sending file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented file picker when sending file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml.cs</url>
+          <url>file://$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs</url>
           <line>28</line>
-          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\Views\MainPage.xaml.cs" initialLine="33" containingFunctionPresentation="Method 'ButtonBase_OnClick'">
+          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\ViewModels\MainViewModel.cs" initialLine="28" containingFunctionPresentation="Method 'OpenSettingsPage'">
             <startOffsets>
-              <option value="624" />
+              <option value="849" />
             </startOffsets>
             <endOffsets>
-              <option value="625" />
+              <option value="929" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

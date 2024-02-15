@@ -9,14 +9,14 @@ using WinUIEx;
 
 namespace InterShareWindows.Views;
 
-public sealed partial class MainPage : Page
+public sealed partial class SettingsPage : Page
 {
     public MainViewModel ViewModel
     {
         get;
     }
 
-    public MainPage()
+    public SettingsPage()
     {
         ViewModel = App.GetService<MainViewModel>();
         DataContext = ViewModel;

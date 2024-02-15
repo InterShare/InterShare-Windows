@@ -13,13 +13,20 @@ namespace InterShareWindows.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
+    private readonly INavigationService _navigationService;
     public readonly AsyncRelayCommand SendFileCommand;
+    public readonly RelayCommand OpenSettingsPageCommand;
     
-    public MainViewModel(ITestService testService)
+    public MainViewModel(INavigationService navigationService)
     {
-        Name = testService.GetName();
-
+        _navigationService = navigationService;
         SendFileCommand = new AsyncRelayCommand(SendFileAsync);
+        OpenSettingsPageCommand = new RelayCommand(OpenSettingsPage);
+    }
+
+    private void OpenSettingsPage()
+    {
+        _navigationService.NavigateTo("InterShareWindows.ViewModels.SettingsViewModel");
     }
 
     private async Task SendFileAsync()
@@ -37,6 +44,4 @@ public class MainViewModel : ViewModelBase
         
         var file = await picker.PickSingleFileAsync();
     }
-
-    public string Name { get; set; }
 }
