@@ -11,9 +11,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="">
+    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Migrate to .net 8">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/InterShareWindows.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/InterShareWindows.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +116,7 @@
       <updated>1706617845330</updated>
       <workItem from="1706617848137" duration="5108000" />
       <workItem from="1708030204196" duration="396000" />
+      <workItem from="1708030615021" duration="1374000" />
     </task>
     <task id="LOCAL-00001" summary="Page should be frame of MainWindow">
       <option name="closed" value="true" />
@@ -125,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708029158759</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Migrate to .net 8">
+      <option name="closed" value="true" />
+      <created>1708030796003</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708030796003</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,25 +144,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Page should be frame of MainWindow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Page should be frame of MainWindow" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs</url>
-          <line>20</line>
-          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\Services\NavigationService.cs" initialLine="20" containingFunctionPresentation="Property 'Frame'">
-            <startOffsets>
-              <option value="485" />
-            </startOffsets>
-            <endOffsets>
-              <option value="521" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Migrate to .net 8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migrate to .net 8" />
   </component>
 </project>
