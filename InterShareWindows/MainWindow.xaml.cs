@@ -24,9 +24,21 @@ namespace InterShareWindows
     /// </summary>
     public sealed partial class MainWindow : WindowEx
     {
+        public Frame ContentSlot;
+        
         public MainWindow()
         {
+            var manager = WindowManager.Get(this);
+            
+            SystemBackdrop = new MicaBackdrop();
+            this.SetWindowSize(480, 350);
+            
             this.InitializeComponent();
+            
+            ContentSlot = ContentSlotEl as Frame;
+
+            SetTitleBar(AppTitleBar);
+            ExtendsContentIntoTitleBar = true;
         }
     }
 }

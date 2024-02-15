@@ -12,40 +12,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Activation/ActivationHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Activation/DefaultActivationHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Activation/IActivationHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/App.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/App.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/LockScreenLogo.scale-200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/SplashScreen.scale-200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/Square150x150Logo.scale-200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/Square44x44Logo.scale-200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/Square44x44Logo.targetsize-24_altform-unplated.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/StoreLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Assets/Wide310x150Logo.scale-200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/InterShareWindows.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/MainWindow.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/MainWindow.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Package.appxmanifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/ActivationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/IActivationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/INavigationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/IPageService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/ITestService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Services/TestService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Startup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/ViewModelBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/app.manifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Services/ActivationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Services/ActivationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +28,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/MainWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2bftDtXxcyh9mmsfW5fJE23nNy1" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -71,7 +53,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "UWP.InterShareWindows.executor": "Run",
     "XThreadsFramesViewSplitterKey": "0.2649494",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -138,6 +120,7 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
@@ -145,17 +128,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/InterShareWindows/App.xaml.cs</url>
-          <line>68</line>
-          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\App.xaml.cs" initialLine="74" containingFunctionPresentation="Method 'GetService'">
+          <url>file://$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs</url>
+          <line>20</line>
+          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\Services\NavigationService.cs" initialLine="20" containingFunctionPresentation="Property 'Frame'">
             <startOffsets>
-              <option value="2471" />
+              <option value="485" />
             </startOffsets>
             <endOffsets>
-              <option value="2579" />
+              <option value="521" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

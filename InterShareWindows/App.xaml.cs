@@ -37,7 +37,7 @@ namespace InterShareWindows
     {
         private readonly IHost _host;
 
-        public static WindowEx MainWindow { get; } = new MainWindow();
+        public static MainWindow MainWindow { get; } = new MainWindow();
         
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
