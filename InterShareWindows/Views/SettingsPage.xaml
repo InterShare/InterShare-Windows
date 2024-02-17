@@ -18,18 +18,6 @@ mc:Ignorable="d">
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             
-            <StackPanel
-                Orientation="Horizontal"
-                Padding="10, 0, 5, 5">
-                <Button Padding="8"
-                        Command="{x:Bind ViewModel.SendFileCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="Document" />
-                        <TextBlock Margin="10, 0, 0, 0" Text="Send File" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-            
             <Button Grid.Column="1"
                 Margin="0, 0, 10, 5"
                 Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
@@ -44,11 +32,9 @@ mc:Ignorable="d">
                     </AnimatedIcon.FallbackIconSource>
                 </AnimatedIcon>
             </Button>
-            
         </Grid>
         
         <Grid Grid.Row="1">
-            
         </Grid>
     </Grid>
 </Page>

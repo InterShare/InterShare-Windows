@@ -11,10 +11,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Implemented file picker when sending file">
+    <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,23 +32,26 @@
     <setting file="file://$PROJECT_DIR$/InterShareWindows/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/IPageService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/NavigationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Services/PageService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Startup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jakob/Projects/InterShareWindows/InterShareWindows/Views/MainPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/obj/x64/Debug/net6.0-windows10.0.19041.0/win10-x64/XamlTypeInfo.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/InterShareWindows/obj/x64/Debug/net8.0-windows10.0.19041.0/win10-x64/App.g.i.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2bftDtXxcyh9mmsfW5fJE23nNy1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -59,7 +63,7 @@
     ".NET Launch Settings Profile.InterShareWindows: InterShareWindows (Unpackaged).executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UWP.InterShareWindows.executor": "Debug",
+    "UWP.InterShareWindows.executor": "Run",
     "XThreadsFramesViewSplitterKey": "0.2649494",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
@@ -123,7 +127,8 @@
       <updated>1706617845330</updated>
       <workItem from="1706617848137" duration="5108000" />
       <workItem from="1708030204196" duration="396000" />
-      <workItem from="1708030615021" duration="6669000" />
+      <workItem from="1708030615021" duration="7249000" />
+      <workItem from="1708191380998" duration="307000" />
     </task>
     <task id="LOCAL-00001" summary="Page should be frame of MainWindow">
       <option name="closed" value="true" />
@@ -157,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708035449597</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added settings page">
+      <option name="closed" value="true" />
+      <created>1708037380206</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708037380206</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +183,26 @@
     <MESSAGE value="Migrate to .net 8" />
     <MESSAGE value="Top buttons send file and settings" />
     <MESSAGE value="Implemented file picker when sending file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented file picker when sending file" />
+    <MESSAGE value="Added settings page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added settings page" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs</url>
+          <line>28</line>
+          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\ViewModels\MainViewModel.cs" initialLine="28" containingFunctionPresentation="Method 'OpenSettingsPage'">
+            <startOffsets>
+              <option value="849" />
+            </startOffsets>
+            <endOffsets>
+              <option value="929" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

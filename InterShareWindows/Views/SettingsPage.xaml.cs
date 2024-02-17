@@ -11,14 +11,14 @@ namespace InterShareWindows.Views;
 
 public sealed partial class SettingsPage : Page
 {
-    public MainViewModel ViewModel
+    public SettingsViewModel ViewModel
     {
         get;
     }
 
     public SettingsPage()
     {
-        ViewModel = App.GetService<MainViewModel>();
+        ViewModel = App.GetService<SettingsViewModel>();
         DataContext = ViewModel;
         InitializeComponent();
     }
