@@ -40,8 +40,8 @@ public class MainViewModel : ViewModelBase
     {
         var picker = new FileOpenPicker();
         
-        var hwnd = App.MainWindow.GetWindowHandle();
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+        var handler = App.MainWindow.GetWindowHandle();
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, handler);
         
         picker.FileTypeFilter.Add("*");
         picker.FileTypeFilter.Add(".jpg");

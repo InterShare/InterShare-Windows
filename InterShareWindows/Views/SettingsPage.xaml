@@ -18,6 +18,12 @@ mc:Ignorable="d">
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             
+            <Button Grid.Column="0"
+                    Command="{x:Bind ViewModel.GoBackCommand}"
+                    Style="{StaticResource NavigationBackButtonNormalStyle}"
+                    IsEnabled="{x:Bind Frame.CanGoBack, Mode=OneWay}" 
+                    ToolTipService.ToolTip="Back"/>
+            
             <Button Grid.Column="1"
                 Margin="0, 0, 10, 5"
                 Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
@@ -28,13 +34,15 @@ mc:Ignorable="d">
                         <animatedVisuals:AnimatedSettingsVisualSource/>
                     </AnimatedIcon.Source>
                     <AnimatedIcon.FallbackIconSource>
-                        <SymbolIconSource Symbol="Find" />
+                        <SymbolIconSource Symbol="Setting" />
                     </AnimatedIcon.FallbackIconSource>
                 </AnimatedIcon>
             </Button>
+            
         </Grid>
         
         <Grid Grid.Row="1">
+            
         </Grid>
     </Grid>
 </Page>

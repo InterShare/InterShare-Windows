@@ -25,7 +25,7 @@ mc:Ignorable="d">
                         Command="{x:Bind ViewModel.SendFileCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Document" />
-                        <TextBlock Margin="10, 0, 0, 0" Text="Send File" />
+                        <TextBlock Margin="10, 0, 0, 0" Text="Share File" />
                     </StackPanel>
                 </Button>
                 <Button Padding="8"
@@ -33,7 +33,7 @@ mc:Ignorable="d">
                         Command="{x:Bind ViewModel.SendClipCommand}">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Copy" />
-                        <TextBlock Margin="10, 0, 0, 0" Text="Send Clipboard" />
+                        <TextBlock Margin="10, 0, 0, 0" Text="Share Clipboard" />
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -49,7 +49,7 @@ mc:Ignorable="d">
                         <animatedVisuals:AnimatedSettingsVisualSource/>
                     </AnimatedIcon.Source>
                     <AnimatedIcon.FallbackIconSource>
-                        <SymbolIconSource Symbol="Find" />
+                        <SymbolIconSource Symbol="Setting" />
                     </AnimatedIcon.FallbackIconSource>
                 </AnimatedIcon>
             </Button>
@@ -82,7 +82,7 @@ mc:Ignorable="d">
                 VerticalAlignment="Center"
                 FontWeight="Bold"
                 Opacity="0.7">
-                Drop any file here
+                Drop any file here to share
             </TextBlock>
         </Grid>
     </Grid>
