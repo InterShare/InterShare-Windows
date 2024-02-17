@@ -28,6 +28,14 @@ mc:Ignorable="d">
                         <TextBlock Margin="10, 0, 0, 0" Text="Send File" />
                     </StackPanel>
                 </Button>
+                <Button Padding="8"
+                        Margin="5,0,0,0"
+                        Command="{x:Bind ViewModel.SendClipCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Copy" />
+                        <TextBlock Margin="10, 0, 0, 0" Text="Send Clipboard" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
             
             <Button Grid.Column="1"

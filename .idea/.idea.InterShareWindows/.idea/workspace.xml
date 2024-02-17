@@ -12,16 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3493d6d0-5d8f-410d-a74b-eee8dbe5412a" name="Changes" comment="Implemented file picker when sending file">
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/SettingsViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InterShareWindows/Views/SettingsPage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InterShareWindows/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/Services/ITestService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Services/PageService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/InterShareWindows/Views/MainPage.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +39,15 @@
     <setting file="file://$PROJECT_DIR$/InterShareWindows/obj/x64/Debug/net8.0-windows10.0.19041.0/win10-x64/App.g.i.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2bftDtXxcyh9mmsfW5fJE23nNy1" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -175,24 +171,5 @@
     <MESSAGE value="Top buttons send file and settings" />
     <MESSAGE value="Implemented file picker when sending file" />
     <option name="LAST_COMMIT_MESSAGE" value="Implemented file picker when sending file" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/InterShareWindows/ViewModels/MainViewModel.cs</url>
-          <line>28</line>
-          <properties documentPath="C:\Users\Jakob\Projects\InterShareWindows\InterShareWindows\ViewModels\MainViewModel.cs" initialLine="28" containingFunctionPresentation="Method 'OpenSettingsPage'">
-            <startOffsets>
-              <option value="849" />
-            </startOffsets>
-            <endOffsets>
-              <option value="929" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
