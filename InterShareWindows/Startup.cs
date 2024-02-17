@@ -26,5 +26,6 @@ public class Startup
 
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<SettingsViewModel>();
+        services.AddSingleton<SelectRecipientViewModel>();
     }
 }

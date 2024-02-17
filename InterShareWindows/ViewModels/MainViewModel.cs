@@ -1,31 +1,26 @@
 using System;
-using System.Diagnostics;
-using System.Net.Mime;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.Pickers;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using ABI.System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using InterShareWindows.Services;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+using WinRT.Interop;
 using WinUIEx;
 
 namespace InterShareWindows.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private readonly INavigationService _navigationService;
     public readonly AsyncRelayCommand SendFileCommand;
     public readonly AsyncRelayCommand SendClipCommand;
     public readonly RelayCommand OpenSettingsPageCommand;
     
-    public MainViewModel(INavigationService navigationService)
+    public MainViewModel(INavigationService navigationService) : base(navigationService)
     {
-        _navigationService = navigationService;
         SendFileCommand = new AsyncRelayCommand(SendFileAsync);
         SendClipCommand = new AsyncRelayCommand(SendClipAsync);
         OpenSettingsPageCommand = new RelayCommand(OpenSettingsPage);
@@ -38,31 +33,37 @@ public class MainViewModel : ViewModelBase
 
     private async Task SendFileAsync()
     {
-        var picker = new FileOpenPicker();
+        var picker = new FileOpenPicker
+        {
+            FileTypeFilter =
+            {
+                "*",
+                ".jpg",
+                ".jpeg",
+                ".png",
+                ".svg"
+            }
+        };
         
         var handler = App.MainWindow.GetWindowHandle();
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, handler);
-        
-        picker.FileTypeFilter.Add("*");
-        picker.FileTypeFilter.Add(".jpg");
-        picker.FileTypeFilter.Add(".jpeg");
-        picker.FileTypeFilter.Add(".png");
-        picker.FileTypeFilter.Add(".svg");
+        InitializeWithWindow.Initialize(picker, handler);
         
         var file = await picker.PickSingleFileAsync();
+        var fileStream = await file.OpenStreamForReadAsync();
+        
+        await SendFileAsync(fileStream);
     }
 
-    private async Task SendClipAsync()
+    private Task SendClipAsync()
     {
-        DataPackageView clipContent = Clipboard.GetContent();
-
-        if (clipContent.Contains(StandardDataFormats.Text))
-        {
-            string text = await clipContent.GetTextAsync();
-        }
-        else
-        {
-            //Todo: If clipContent is is a file, the file should be handled as selected via sendFile
-        }
+        return SendFileAsync(null);
     }
+    
+    private async Task SendFileAsync(Stream fileStream)
+    {
+        _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel");
+        
+        await Task.CompletedTask;
+    }
+    
 }
