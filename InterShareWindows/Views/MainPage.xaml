@@ -46,10 +46,36 @@ mc:Ignorable="d">
                 </AnimatedIcon>
             </Button>
             
-        </Grid>
-        
-        <Grid Grid.Row="1">
             
+           
+        </Grid>
+
+        <Grid
+            x:Name="DropZone"
+            AllowDrop="True"
+            DragEnter="OnDragOver"
+            DragLeave="OnDragLeave"
+            Drop="OnDrop"
+            Background="Transparent"
+            Grid.Row="1"
+            BorderThickness="0, 1, 0, 0"
+            Margin="10"
+            CornerRadius="10">
+            
+            <Border
+                Opacity="0.3"
+                BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}"
+                BorderThickness="1"
+                CornerRadius="10"
+                />
+                
+            <TextBlock 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontWeight="Bold"
+                Opacity="0.7">
+                Drop any file here
+            </TextBlock>
         </Grid>
     </Grid>
 </Page>
