@@ -25,5 +25,6 @@ public class Startup
         services.AddSingleton<INavigationService, NavigationService>();
 
         services.AddSingleton<MainViewModel>();
+        services.AddSingleton<SettingsViewModel>();
     }
 }
