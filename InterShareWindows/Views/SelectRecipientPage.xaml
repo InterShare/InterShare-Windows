@@ -4,8 +4,16 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 xmlns:animatedVisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+xmlns:views="using:InterShareWindows.Views"
+xmlns:converters="using:InterShareWindows.Views.Converters"
+xmlns:controls="using:ABI.Microsoft.UI.Xaml.Controls"
+xmlns:system="using:System"
 mc:Ignorable="d">
 
+    <Page.Resources>
+        <converters:DeviceTypeToVisibilityConverter x:Key="DeviceTypeToVisibilityConverter"/>
+    </Page.Resources>
+    
     <Grid x:Name="ContentArea">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -20,8 +28,53 @@ mc:Ignorable="d">
                     ToolTipService.ToolTip="Back"/>
         </StackPanel>
         
-        <Grid Grid.Row="1">
-            
-        </Grid>
+        <ListView Grid.Row="1" SelectionMode="Single" ItemsSource="{x:Bind ViewModel.Devices}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="views:Device">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                            <FontIcon 
+                                Grid.Column="0"
+                                Grid.RowSpan="2"
+                                x:Name="MobileIcon"
+                                Glyph="&#xE1C1;"
+                                Visibility="{Binding DeviceType, Converter={StaticResource DeviceTypeToVisibilityConverter}, ConverterParameter='Mobile'}"
+                                VerticalAlignment="Center" 
+                                Margin="0,0, 7,0"/>
+                            <FontIcon 
+                                Grid.Column="0"
+                                Grid.RowSpan="2"
+                                x:Name="PcIcon"
+                                Glyph="&#xE977;"
+                                Visibility="{Binding DeviceType, Converter={StaticResource DeviceTypeToVisibilityConverter}, ConverterParameter='PC'}"
+                                VerticalAlignment="Center"
+                                />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{x:Bind Name}"
+                                   x:Phase="1"
+                                   Style="{ThemeResource BaseTextBlockStyle}"
+                                   VerticalAlignment="Center"
+                                   Margin="12,6,0,0" />
+                        <TextBlock  Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{x:Bind IP}"
+                                    x:Phase="2"
+                                    Style="{ThemeResource BodyTextBlockStyle}"
+                                    VerticalAlignment="Center"
+                                    Margin="12,0,0,6"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

@@ -15,7 +15,7 @@ public sealed partial class SelectRecipientPage : Page
     {
         get;
     }
-
+    
     public SelectRecipientPage()
     {
         ViewModel = App.GetService<SelectRecipientViewModel>();

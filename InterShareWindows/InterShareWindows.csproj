@@ -48,6 +48,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Device.cs">
+      <DependentUpon>SelectRecipientPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
   <!-- 
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
