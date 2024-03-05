@@ -6,6 +6,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.Core;
 using ABI.System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using InterShareWindows.Params;
 using InterShareWindows.Services;
 using Microsoft.UI.Xaml;
 using WinRT.Interop;
@@ -61,7 +62,12 @@ public class MainViewModel : ViewModelBase
     
     private async Task SendFileAsync(Stream fileStream)
     {
-        _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel");
+        var sendParameters = new SendParam
+        {
+            FileStream = fileStream
+        };
+        
+        _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel", sendParameters);
         
         await Task.CompletedTask;
     }

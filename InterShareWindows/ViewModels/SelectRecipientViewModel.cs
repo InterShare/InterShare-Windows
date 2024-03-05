@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using InterShareWindows.Params;
 using InterShareWindows.Services;
 using InterShareWindows.Views;
 
@@ -7,6 +8,8 @@ namespace InterShareWindows.ViewModels;
 public class SelectRecipientViewModel : ViewModelBase
 {
     private ObservableCollection<Device> _devices;
+    
+    public SendParam SendParam { get; set; }
 
     public ObservableCollection<Device> Devices
     {
