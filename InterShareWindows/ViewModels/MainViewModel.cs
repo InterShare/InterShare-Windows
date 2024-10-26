@@ -19,11 +19,11 @@ public class MainViewModel : ViewModelBase
     public readonly AsyncRelayCommand SendFileCommand;
     public readonly AsyncRelayCommand SendClipCommand;
     public readonly RelayCommand OpenSettingsPageCommand;
-    
+
     public MainViewModel(INavigationService navigationService) : base(navigationService)
     {
         SendFileCommand = new AsyncRelayCommand(SendFileAsync);
-        SendClipCommand = new AsyncRelayCommand(SendClipAsync);
+        SendClipCommand = new AsyncRelayCommand(SendClipboardAsync);
         OpenSettingsPageCommand = new RelayCommand(OpenSettingsPage);
     }
 
@@ -45,31 +45,31 @@ public class MainViewModel : ViewModelBase
                 ".svg"
             }
         };
-        
+
         var handler = App.MainWindow.GetWindowHandle();
         InitializeWithWindow.Initialize(picker, handler);
-        
+
         var file = await picker.PickSingleFileAsync();
         var fileStream = await file.OpenStreamForReadAsync();
-        
+
         await SendFileAsync(fileStream);
     }
 
-    private Task SendClipAsync()
+    private Task SendClipboardAsync()
     {
         return SendFileAsync(null);
     }
-    
+
     private async Task SendFileAsync(Stream fileStream)
     {
         var sendParameters = new SendParam
         {
             FileStream = fileStream
         };
-        
+
         _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel", sendParameters);
-        
+
         await Task.CompletedTask;
     }
-    
+
 }
