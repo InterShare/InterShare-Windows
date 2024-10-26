@@ -8,6 +8,7 @@ using Windows.Devices.Sms;
 using Windows.Storage;
 using ABI.Windows.Security.ExchangeActiveSyncProvisioning;
 using CommunityToolkit.Mvvm.Input;
+using InterShareWindows.Data;
 using InterShareWindows.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -17,75 +18,55 @@ namespace InterShareWindows.ViewModels
 {
     public class SettingsViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public readonly AsyncRelayCommand SaveCommand;
+        public readonly RelayCommand SaveCommand;
 
         private string _deviceName;
-        private bool _isShortInput;
+        private bool _showErrorDeviceNameToShort;
 
         public string DeviceName
         {
             get => _deviceName;
-            set => SetProperty(ref _deviceName, value);
+            set
+            {
+                SetProperty(ref _deviceName, value);
+                OnPropertyChanged(nameof(DeviceName));
+            }
         }
-        public bool IsShortInput
+
+        public bool ShowErrorDeviceNameToShort
         {
-            get => _isShortInput;
-            set => SetProperty(ref _isShortInput, value);
+            get => _showErrorDeviceNameToShort;
+            set
+            {
+                SetProperty(ref _showErrorDeviceNameToShort, value);
+                OnPropertyChanged(nameof(ShowErrorDeviceNameToShort));
+            }
         }
+
         public SettingsViewModel(INavigationService navigationService) : base(navigationService)
         {
-            SaveCommand = new AsyncRelayCommand(SaveAsync);
-
-            LoadDeviceName();
-        }
-
-        private async Task SaveAsync()
-        {
-            if (DeviceName.Length < 3)
-            {
-                IsShortInput = true;
-                OnPropertyChanged(nameof(IsShortInput));
-                return;
-            }
-            else
-            {
-                IsShortInput = false;
-                OnPropertyChanged(nameof(IsShortInput));
-                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-                localSettings.Values["DeviceName"] = DeviceName;
-            }
-        }
-
-        private async Task ShowErrorMessage(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Error",
-                Content = message,
-                CloseButtonText = "OK"
-            };
+            DeviceName = LocalStorage.DeviceName;
             
-            await dialog.ShowAsync();
+            SaveCommand = new RelayCommand(Save);
+        }
+
+        private void Save()
+        {
+            try
+            {
+                LocalStorage.DeviceName = DeviceName;
+                
+                DeviceName = DeviceName.Trim();
+            }
+            catch (ArgumentException e)
+            {
+                ShowErrorDeviceNameToShort = true;
+            }
         }
         
-        public async Task LoadDeviceName()
-        {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            if (localSettings.Values.TryGetValue("DeviceName", out object savedDeviceName))
-            {
-                DeviceName = savedDeviceName.ToString();
-            }
-            else
-            {
-                // Set a default value if the device name is not found in local storage
-                DeviceName = System.Environment.MachineName;
-            }
-
-            IsShortInput = false;
-            OnPropertyChanged(nameof(IsShortInput));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        public new event PropertyChangedEventHandler PropertyChanged;
+        
+        protected override void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
