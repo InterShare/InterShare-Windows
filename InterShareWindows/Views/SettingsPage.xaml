@@ -6,71 +6,38 @@ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 xmlns:animatedVisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
 mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <StackPanel Margin="16">
+        <TextBlock
+            Text="Device Name"
+            FontSize="24"
+            HorizontalTextAlignment="Center"
+            HorizontalAlignment="Center"
+            FontWeight="Bold"
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+            Margin="0,0,0,20" />
+        <TextBox
+            x:Name="DeviceNameTextBox"
+            Text="{x:Bind ViewModel.DeviceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TextChanged="DeviceNameTextBox_OnTextChanged"
+            MaxLength="64"
+            MaxWidth="300"
+            Margin="0,0,0,3"
+            Padding="8" />
+        <TextBlock
+            HorizontalTextAlignment="Center"
+            HorizontalAlignment="Center"
+            Text="Device name must be at least a single character."
+            Margin="5 0"
+            Foreground="Red"
+            Visibility="{x:Bind ViewModel.ShowErrorDeviceNameToShort, Mode=OneWay, FallbackValue=Collapsed}" />
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0"
-                    Command="{x:Bind ViewModel.GoBackCommand}"
-                    Style="{StaticResource NavigationBackButtonNormalStyle}"
-                    IsEnabled="{x:Bind Frame.CanGoBack, Mode=OneWay}" 
-                    ToolTipService.ToolTip="Back"/>
-            
-            <Button Grid.Column="1"
-                Margin="0, 0, 10, 5"
-                Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
-                BorderBrush="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}"
-                >
-                <AnimatedIcon Width="20">
-                    <AnimatedIcon.Source>
-                        <animatedVisuals:AnimatedSettingsVisualSource/>
-                    </AnimatedIcon.Source>
-                    <AnimatedIcon.FallbackIconSource>
-                        <SymbolIconSource Symbol="Setting" />
-                    </AnimatedIcon.FallbackIconSource>
-                </AnimatedIcon>
-            </Button>
-            
-        </Grid>
-        
-        <Grid Grid.Row="1">
-            <StackPanel Margin="16">
-                <TextBlock
-                    Text="Device Settings"
-                    FontSize="24"
-                    FontWeight="Bold"
-                    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                    Margin="0,0,0,12" />
-                <TextBox
-                    x:Name="DeviceNameTextBox"
-                    Text="{x:Bind ViewModel.DeviceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    TextChanged="DeviceNameTextBox_OnTextChanged"
-                    MaxLength="64"
-                    Margin="0,0,0,3"
-                    Padding="8" />
-                <TextBlock
-                    Text="Device name must be at least a single character."
-                    Margin="5 0"
-                    Foreground="Red"
-                    Visibility="{x:Bind ViewModel.ShowErrorDeviceNameToShort, Mode=OneWay, FallbackValue=Collapsed}" />
-
-                <Button
-                    Content="Save"
-                    Command="{x:Bind ViewModel.SaveCommand}"
-                    HorizontalAlignment="Stretch"
-                    Background="{ThemeResource SystemAccentColor}"
-                    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                    Padding="12" 
-                    Margin="12"/>
-            </StackPanel>
-        </Grid>
-    </Grid>
+        <Button
+            Content="Save"
+            MaxWidth="300"
+            Command="{x:Bind ViewModel.SaveCommand}"
+            HorizontalAlignment="Stretch"
+            Background="{ThemeResource SystemAccentColor}"
+            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+            Margin="0, 10"/>
+    </StackPanel>
 </Page>

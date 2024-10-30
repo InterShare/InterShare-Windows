@@ -8,73 +8,83 @@ xmlns:views="using:InterShareWindows.Views"
 xmlns:converters="using:InterShareWindows.Views.Converters"
 xmlns:controls="using:ABI.Microsoft.UI.Xaml.Controls"
 xmlns:system="using:System"
+xmlns:interShareSdk="using:InterShareSdk"
 mc:Ignorable="d">
 
     <Page.Resources>
         <converters:DeviceTypeToVisibilityConverter x:Key="DeviceTypeToVisibilityConverter"/>
+        <converters:DeviceNameAvatarConverter x:Key="DeviceNameAvatarConverter"/>
     </Page.Resources>
-    
-    <Grid x:Name="ContentArea">
+
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <Button Grid.Column="0"
-                    Command="{x:Bind ViewModel.GoBackCommand}"
-                    Style="{StaticResource NavigationBackButtonNormalStyle}"
-                    IsEnabled="{x:Bind Frame.CanGoBack, Mode=OneWay}" 
-                    ToolTipService.ToolTip="Back"/>
-        </StackPanel>
-        
-        <ListView Grid.Row="1" SelectionMode="Single" ItemsSource="{x:Bind ViewModel.Devices}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="views:Device">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                            <FontIcon 
-                                Grid.Column="0"
-                                Grid.RowSpan="2"
-                                x:Name="MobileIcon"
-                                Glyph="&#xE1C1;"
-                                Visibility="{Binding DeviceType, Converter={StaticResource DeviceTypeToVisibilityConverter}, ConverterParameter='Mobile'}"
-                                VerticalAlignment="Center" 
-                                Margin="0,0, 7,0"/>
-                            <FontIcon 
-                                Grid.Column="0"
-                                Grid.RowSpan="2"
-                                x:Name="PcIcon"
-                                Glyph="&#xE977;"
-                                Visibility="{Binding DeviceType, Converter={StaticResource DeviceTypeToVisibilityConverter}, ConverterParameter='PC'}"
-                                VerticalAlignment="Center"
-                                />
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" Padding="10, 10">
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Devices}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Orientation="Horizontal" VerticalAlignment="Top" VerticalChildrenAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="interShareSdk:Device">
+                        <Button Margin="0" Padding="5" Width="100" VerticalAlignment="Top" Background="Transparent" BorderThickness="0">
+                            <StackPanel HorizontalAlignment="Center">
+                                <Grid HorizontalAlignment="Center">
+                                    <ProgressRing IsActive="False" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="1"
-                                   Text="{x:Bind Name}"
-                                   x:Phase="1"
-                                   Style="{ThemeResource BaseTextBlockStyle}"
-                                   VerticalAlignment="Center"
-                                   Margin="12,6,0,0" />
-                        <TextBlock  Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{x:Bind DeviceType}"
-                                    x:Phase="2"
-                                    Style="{ThemeResource BodyTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="12,0,0,6"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                    <Border Width="50" Height="50"
+                                        CornerRadius="40"
+                                        Background="Gray"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                                        <TextBlock
+                                            Text="{x:Bind name, Converter={StaticResource DeviceNameAvatarConverter}}"
+                                            FontSize="25"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock
+                                    Text="{x:Bind name}"
+                                    TextWrapping="Wrap"
+                                    MaxLines="2"
+                                    HorizontalTextAlignment="Center">
+                                </TextBlock>
+
+                                <TextBlock
+                                    Text="Connecting"
+                                    FontSize="11"
+                                    Opacity="0.6"
+                                    MaxLines="1"
+                                    HorizontalTextAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Border Grid.Row="1" Margin="0" Padding="10">
+            <Grid ColumnDefinitions="Auto, *">
+                <ProgressRing Margin="10, 0" IsActive="True" Height="20" Width="20" Grid.Column="0" VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock FontWeight="Bold">Looking for nearby devices</TextBlock>
+                    <TextBlock
+                        Opacity="0.7"
+                        TextWrapping="Wrap"
+                        MaxLines="3">
+                        Make sure the receiver has the InterShare app open on their device.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

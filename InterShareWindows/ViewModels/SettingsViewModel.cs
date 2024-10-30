@@ -54,6 +54,13 @@ namespace InterShareWindows.ViewModels
         {
             try
             {
+                if (DeviceName.Trim().Length < 1)
+                {
+                    ShowErrorDeviceNameToShort = true;
+                    return;
+                }
+
+                ShowErrorDeviceNameToShort = false;
                 LocalStorage.DeviceName = DeviceName;
                 
                 DeviceName = DeviceName.Trim();
