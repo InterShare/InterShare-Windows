@@ -27,6 +27,7 @@
             </winUiEx:TitleBar.IconSource>
         </winUiEx:TitleBar>
 
+        
         <NavigationView
             Grid.Row="1"
             IsBackButtonVisible="Collapsed"
