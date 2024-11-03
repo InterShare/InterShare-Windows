@@ -22,20 +22,10 @@
             IsBackButtonVisible="True"
             BackRequested="OnBackRequested"
             IsBackEnabled="False">
-            <winUiEx:TitleBar.IconSource>
-                <ImageIconSource ImageSource="/Assets/LockScreenLogo.scale-200.png" />
-            </winUiEx:TitleBar.IconSource>
         </winUiEx:TitleBar>
 
-        
-        <NavigationView
+        <Frame
             Grid.Row="1"
-            IsBackButtonVisible="Collapsed"
-            IsBackEnabled="True"
-            AlwaysShowHeader="False"
-            IsPaneVisible="False"
-            PaneDisplayMode="Left">
-            <Frame x:Name="ContentSlotEl"/>
-        </NavigationView>
+            x:Name="ContentSlotEl" />
     </Grid>
 </winUiEx:WindowEx>

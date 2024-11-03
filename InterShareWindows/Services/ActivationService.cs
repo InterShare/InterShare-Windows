@@ -7,7 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace InterShareWindows.Services;
 
-public class ActivationService : IActivationService
+public class ActivationService
 {
     private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
     private readonly IEnumerable<IActivationHandler> _activationHandlers;

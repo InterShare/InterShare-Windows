@@ -10,27 +10,8 @@ namespace InterShareWindows.ViewModels;
 
 public abstract class ViewModelBase : ObservableRecipient, INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-    
-    protected readonly INavigationService _navigationService;
-    
-    public readonly RelayCommand GoBackCommand;
-
-    public ViewModelBase(INavigationService navigationService)
+    public ViewModelBase()
     {
-        _navigationService = navigationService;
-        
-        GoBackCommand = new RelayCommand(GoBack);
-    }
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    
-    private void GoBack()
-    {
-        _navigationService.GoBack();
     }
     
     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)

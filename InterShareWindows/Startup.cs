@@ -19,10 +19,11 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
-        
-        services.AddSingleton<IActivationService, ActivationService>();
-        services.AddSingleton<IPageService, PageService>();
-        services.AddSingleton<INavigationService, NavigationService>();
+
+        services.AddSingleton<ActivationService>();
+        services.AddSingleton<PageService>();
+        services.AddSingleton<NavigationService>();
+        services.AddSingleton<NearbyService>();
 
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<SettingsViewModel>();

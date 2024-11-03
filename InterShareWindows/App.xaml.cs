@@ -24,6 +24,9 @@ using InterShareWindows.ViewModels;
 using Microsoft.Extensions.Configuration;
 using WinUIEx;
 using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
+using Microsoft.Windows.AppNotifications;
+using Velopack;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -46,7 +49,8 @@ namespace InterShareWindows
         public App()
         {
             InitializeComponent();
-            
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
+
             /*var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -71,6 +75,30 @@ namespace InterShareWindows
 
             return service;
         }
+        private static async Task UpdateMyApp()
+        {
+            try
+            {
+                var mgr = new UpdateManager("https://intershare.app/windows/updates");
+
+                // check for new version
+                var newVersion = await mgr.CheckForUpdatesAsync();
+                if (newVersion == null)
+                {
+                    return;
+                }
+
+                // download new version
+                await mgr.DownloadUpdatesAsync(newVersion);
+
+                // install new version and restart app
+                mgr.ApplyUpdatesAndRestart(newVersion);
+            }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine(exception);
+            }
+        }
 
         /// <summary>
         /// Invoked when the application is launched.
@@ -78,9 +106,18 @@ namespace InterShareWindows
         /// <param name="args">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            base.OnLaunched(args);
-            
-            await GetService<IActivationService>().ActivateAsync(args);
+            VelopackApp.Build().Run();
+
+            var nearbyService = GetService<NearbyService>();
+            nearbyService.Initialize();
+
+            await GetService<ActivationService>().ActivateAsync(args);
+            await UpdateMyApp();
+        }
+
+        void OnProcessExit(object sender, EventArgs e)
+        {
+            AppNotificationManager.Default.Unregister();
         }
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace InterShareWindows.Services;
 
-public class NavigationService : INavigationService
+public class NavigationService
 {
-    private readonly IPageService _pageService;
+    private readonly PageService _pageService;
     private object? _lastParameterUsed;
     private Frame? _frame;
 
@@ -36,7 +36,7 @@ public class NavigationService : INavigationService
     [MemberNotNullWhen(true, nameof(Frame), nameof(_frame))]
     public bool CanGoBack => Frame != null && Frame.CanGoBack;
 
-    public NavigationService(IPageService pageService)
+    public NavigationService(PageService pageService)
     {
         _pageService = pageService;
     }

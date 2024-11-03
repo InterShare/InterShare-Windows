@@ -7,9 +7,9 @@ namespace InterShareWindows.Activation;
 
 public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
 {
-    private readonly INavigationService _navigationService;
+    private readonly NavigationService _navigationService;
 
-    public DefaultActivationHandler(INavigationService navigationService)
+    public DefaultActivationHandler(NavigationService navigationService)
     {
         _navigationService = navigationService;
     }

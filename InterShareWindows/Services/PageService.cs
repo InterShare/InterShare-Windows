@@ -9,7 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace InterShareWindows.Services;
 
-public class PageService : IPageService
+public class PageService
 {
     private readonly Dictionary<string, Type> _pages = new();
 

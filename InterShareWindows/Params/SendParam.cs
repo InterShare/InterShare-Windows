@@ -1,8 +1,8 @@
-using System.IO;
+using System.Collections.Generic;
 
 namespace InterShareWindows.Params;
 
 public class SendParam
 {
-    public Stream FileStream { get; set; }
+    public List<string> FilePaths { get; set; }
 }

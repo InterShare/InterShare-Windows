@@ -4,84 +4,119 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 xmlns:animatedVisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+xmlns:converters="using:CommunityToolkit.WinUI.Converters"
 mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="55" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
 
-        <Grid VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <StackPanel
+            Padding="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{x:Bind ViewModel.BluetoothEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True, Mode=OneWay}">
+
+            <FontIcon Foreground="PaleVioletRed" FontSize="30" Glyph="&#xE702;" />
             
-            <StackPanel
-                Orientation="Horizontal"
-                VerticalAlignment="Center"
-                Padding="10, 0, 5, 0">
-                <Button Padding="8"
-                        Command="{x:Bind ViewModel.SendFileCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="Document" />
-                        <TextBlock Margin="10, 0, 0, 0" Text="Share File" />
-                    </StackPanel>
-                </Button>
-                <Button Padding="8"
-                        Margin="5,0,0,0"
-                        Command="{x:Bind ViewModel.SendClipCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="Copy" />
-                        <TextBlock Margin="10, 0, 0, 0" Text="Share Clipboard" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-
-            <Button Grid.Column="1"
+            <TextBlock
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                Margin="0, 0, 10, 0"
-                Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
-                BorderBrush="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}"
-                Command="{x:Bind ViewModel.OpenSettingsPageCommand}">
-                <AnimatedIcon Width="20">
-                    <AnimatedIcon.Source>
-                        <animatedVisuals:AnimatedSettingsVisualSource/>
-                    </AnimatedIcon.Source>
-                    <AnimatedIcon.FallbackIconSource>
-                        <SymbolIconSource Symbol="Setting" />
-                    </AnimatedIcon.FallbackIconSource>
-                </AnimatedIcon>
-            </Button>
-        </Grid>
-
-        <Grid
-            x:Name="DropZone"
-            AllowDrop="True"
-            DragEnter="OnDragOver"
-            DragLeave="OnDragLeave"
-            Drop="OnDrop"
-            Background="Transparent"
-            Grid.Row="1"
-            BorderThickness="0, 1, 0, 0"
-            Margin="10, 0, 10, 10"
-            CornerRadius="10">
-            
-            <Border
-                Opacity="0.3"
-                BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}"
-                BorderThickness="1"
-                CornerRadius="10"
-                />
-                
-            <TextBlock 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontWeight="Bold"
-                Opacity="0.7">
-                Drop any file here to share
+                    FontWeight="Bold"
+                    Foreground="PaleVioletRed"
+                    FontSize="30"
+                    Opacity="0.8">
+                    Bluetooth is off
             </TextBlock>
+            <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    TextWrapping="Wrap"
+                    FontSize="20"
+                    Opacity="0.7">
+                    InterShare uses Bluetooth to advertise and find nearby devices.
+            </TextBlock>
+        </StackPanel>
+
+        <Grid x:Name="ContentArea" Visibility="{x:Bind ViewModel.BluetoothEnabled, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Padding="10, 0, 5, 0">
+                    <Button Padding="8"
+                    Command="{x:Bind ViewModel.SendFileCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Document" />
+                            <TextBlock Margin="10, 0, 0, 0" Text="Share Files" />
+                        </StackPanel>
+                    </Button>
+                    <!--<Button Padding="8"
+                            Margin="5,0,0,0"
+                            Command="{x:Bind ViewModel.SendClipCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Copy" />
+                            <TextBlock Margin="10, 0, 0, 0" Text="Share Clipboard" />
+                        </StackPanel>
+                    </Button>-->
+                </StackPanel>
+
+                <Button Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Margin="0, 0, 10, 0"
+                    Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
+                    BorderBrush="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}"
+                    Command="{x:Bind ViewModel.OpenSettingsPageCommand}">
+                    <AnimatedIcon Width="20">
+                        <AnimatedIcon.Source>
+                            <animatedVisuals:AnimatedSettingsVisualSource/>
+                        </AnimatedIcon.Source>
+                        <AnimatedIcon.FallbackIconSource>
+                            <SymbolIconSource Symbol="Setting" />
+                        </AnimatedIcon.FallbackIconSource>
+                    </AnimatedIcon>
+                </Button>
+            </Grid>
+
+            <Grid
+                x:Name="DropZone"
+                AllowDrop="True"
+                DragEnter="OnDragOver"
+                DragLeave="OnDragLeave"
+                Drop="OnDrop"
+                Background="Transparent"
+                Grid.Row="1"
+                BorderThickness="0, 1, 0, 0"
+                Margin="10, 0, 10, 10"
+                CornerRadius="10">
+
+                <Border
+                    Opacity="0.3"
+                    BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    />
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Opacity="0.7">
+                    Drop files here to share
+                </TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

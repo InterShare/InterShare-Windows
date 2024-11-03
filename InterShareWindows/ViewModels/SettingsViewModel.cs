@@ -13,37 +13,21 @@ using InterShareWindows.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DeviceInformation = ABI.Windows.Devices.Enumeration.DeviceInformation;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace InterShareWindows.ViewModels
 {
-    public class SettingsViewModel : ViewModelBase, INotifyPropertyChanged
+    public partial class SettingsViewModel : ViewModelBase
     {
         public readonly RelayCommand SaveCommand;
 
+        [ObservableProperty]
         private string _deviceName;
+
+        [ObservableProperty]
         private bool _showErrorDeviceNameToShort;
 
-        public string DeviceName
-        {
-            get => _deviceName;
-            set
-            {
-                SetProperty(ref _deviceName, value);
-                OnPropertyChanged(nameof(DeviceName));
-            }
-        }
-
-        public bool ShowErrorDeviceNameToShort
-        {
-            get => _showErrorDeviceNameToShort;
-            set
-            {
-                SetProperty(ref _showErrorDeviceNameToShort, value);
-                OnPropertyChanged(nameof(ShowErrorDeviceNameToShort));
-            }
-        }
-
-        public SettingsViewModel(INavigationService navigationService) : base(navigationService)
+        public SettingsViewModel() : base()
         {
             DeviceName = LocalStorage.DeviceName;
             
@@ -70,13 +54,5 @@ namespace InterShareWindows.ViewModels
                 ShowErrorDeviceNameToShort = true;
             }
         }
-        
-        public new event PropertyChangedEventHandler PropertyChanged;
-        
-        protected override void OnPropertyChanged(string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
     }
 }

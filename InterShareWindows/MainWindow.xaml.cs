@@ -18,6 +18,8 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using WinRT.Interop;
 using WinUIEx;
+using Windows.Devices.Radios;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,51 +29,32 @@ namespace InterShareWindows
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : WindowEx, NearbyConnectionDelegate
+    public partial class MainWindow : WindowEx
     {
         public Frame ContentSlot;
-        private readonly INavigationService _navigationService;
+        private readonly NavigationService _navigationService;
 
         public MainWindow()
         {
-            // var manager = WindowManager.Get(this);
             this.InitializeComponent();
             SystemBackdrop = new MicaBackdrop();
             this.SetWindowSize(480, 350);
+            MinWidth = 400;
+            MinHeight = 300;
+            this.SetIsMaximizable(false);
+
             ExtendsContentIntoTitleBar = true;
             ContentSlot = ContentSlotEl as Frame;
 
-            _navigationService = App.GetService<INavigationService>();
+            _navigationService = App.GetService<NavigationService>();
             _navigationService.Navigated += NavigationService_Navigated;
-
-            // SetTitleBar(TitleBar);
-            // ExtendsContentIntoTitleBar = true;
-            // AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-            // var hwnd = WindowNative.GetWindowHandle(this);
-            // WindowId id = Win32Interop.GetWindowIdFromWindow(hwnd);
-            // var appWindow = AppWindow.GetFromWindowId(id);
-            // if (true)
-            // {
-            //     var titleBar = appWindow.TitleBar;
-            //     titleBar.ExtendsContentIntoTitleBar = true;
-            //     titleBar.ButtonBackgroundColor = Colors.Transparent;
-            //     titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            // }
-
-            // var device = new Device(id: "d5a5eab4-4dc6-46ae-991c-2c7ada359ac8", name: "Windows PC", deviceType: 0);
-            // var nearbyServer = new NearbyServer(device, this);
-            // nearbyServer.Start();
         }
 
         private void NavigationService_Navigated(object sender, NavigationEventArgs e)
         {
             var canGoBack = _navigationService.CanGoBack;
+            CustomTitleBar.IsBackButtonVisible = canGoBack;
             CustomTitleBar.IsBackEnabled = canGoBack;
-        }
-
-        public void ReceivedConnectionRequest(ConnectionRequest request)
-        {
-            Console.WriteLine("Received connection request");
         }
 
         private void OnBackRequested(TitleBar sender, object args)
