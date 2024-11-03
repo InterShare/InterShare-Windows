@@ -48,6 +48,7 @@ namespace InterShareWindows
         /// </summary>
         public App()
         {
+            VelopackApp.Build().Run();
             InitializeComponent();
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
@@ -79,7 +80,7 @@ namespace InterShareWindows
         {
             try
             {
-                var mgr = new UpdateManager("https://intershare.app/windows/updates");
+                var mgr = new UpdateManager("https://intershare.app/windows-download");
 
                 // check for new version
                 var newVersion = await mgr.CheckForUpdatesAsync();
@@ -106,8 +107,6 @@ namespace InterShareWindows
         /// <param name="args">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            VelopackApp.Build().Run();
-
             var nearbyService = GetService<NearbyService>();
             nearbyService.Initialize();
 

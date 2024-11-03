@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DeviceInformation = ABI.Windows.Devices.Enumeration.DeviceInformation;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Reflection;
 
 namespace InterShareWindows.ViewModels
 {
@@ -27,10 +28,18 @@ namespace InterShareWindows.ViewModels
         [ObservableProperty]
         private bool _showErrorDeviceNameToShort;
 
+        [ObservableProperty]
+        private string _version;
+
         public SettingsViewModel() : base()
         {
             DeviceName = LocalStorage.DeviceName;
-            
+
+            var version = Assembly.GetExecutingAssembly()
+                                  .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                                  ?.InformationalVersion;
+            Version = version ?? "Version not found";
+
             SaveCommand = new RelayCommand(Save);
         }
 
