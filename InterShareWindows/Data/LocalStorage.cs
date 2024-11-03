@@ -16,7 +16,8 @@ internal record SettingsFile
 
 public static class LocalStorage
 {
-    public static string SettingsPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString(), "InterShare", "settings.json").ToString();
+    public static string SettingsFolderPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString(), "InterShare").ToString();
+    public static string SettingsFilePath => Path.Combine(SettingsFolderPath, "settings.json").ToString();
 
     private static SettingsFile _currentSettings;
 
@@ -42,7 +43,12 @@ public static class LocalStorage
     {
         if (_currentSettings == null)
         {
-            if (!File.Exists(SettingsPath))
+            if (!Directory.Exists(SettingsFolderPath))
+            {
+                Directory.CreateDirectory(SettingsFolderPath);
+            }
+
+            if (!File.Exists(SettingsFilePath))
             {
                 _currentSettings = new SettingsFile
                 {
@@ -55,7 +61,7 @@ public static class LocalStorage
             }
             else
             {
-                var file = File.OpenRead(SettingsPath);
+                var file = File.OpenRead(SettingsFilePath);
                 var settings = JsonSerializer.Deserialize<SettingsFile>(file);
                 _currentSettings = settings;
             }
@@ -68,7 +74,7 @@ public static class LocalStorage
     private static void SaveSettings()
     {
         var serialized = JsonSerializer.Serialize(_currentSettings);
-        File.WriteAllText(SettingsPath, serialized);
+        File.WriteAllText(SettingsFilePath, serialized);
     }
     
     public static string DeviceId
