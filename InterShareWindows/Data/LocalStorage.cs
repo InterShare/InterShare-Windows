@@ -61,7 +61,7 @@ public static class LocalStorage
             }
             else
             {
-                var file = File.OpenRead(SettingsFilePath);
+                using var file = File.OpenRead(SettingsFilePath);
                 var settings = JsonSerializer.Deserialize<SettingsFile>(file);
                 _currentSettings = settings;
             }
@@ -89,11 +89,6 @@ public static class LocalStorage
     {
         get
         {
-            //if (LocalSettings.Values.TryGetValue(DeviceNameKey, out var value))
-            //{
-            //    return (string)value;
-            //}
-            
             return CurrentSettings.DeviceName;
         }
         
