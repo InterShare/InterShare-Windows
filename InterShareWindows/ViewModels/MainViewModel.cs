@@ -18,6 +18,7 @@ using Windows.Devices.Radios;
 using CommunityToolkit.Mvvm.ComponentModel;
 using InterShareSdk;
 using System.Threading;
+using InterShareWindows.Data;
 
 namespace InterShareWindows.ViewModels;
 
@@ -34,6 +35,9 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private bool _bluetoothEnabled = true;
 
+    [ObservableProperty]
+    private string _deviceName;
+
     public MainViewModel(NavigationService navigationService, NearbyService nearbyServer) : base()
     {
         _uiContext = SynchronizationContext.Current;
@@ -42,7 +46,8 @@ public partial class MainViewModel : ViewModelBase
         SendFileCommand = new AsyncRelayCommand(SendFileAsync);
         SendClipCommand = new AsyncRelayCommand(SendClipboardAsync);
         OpenSettingsPageCommand = new RelayCommand(OpenSettingsPage);
-        
+        DeviceName = LocalStorage.DeviceName;
+
         CheckBluetooth();
     }
 
@@ -123,5 +128,27 @@ public partial class MainViewModel : ViewModelBase
         _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel", sendParameters);
 
         await Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    public async Task SendFolder()
+    {
+
+        var picker = new FolderPicker
+        {
+        };
+
+        var handler = App.MainWindow.GetWindowHandle();
+        InitializeWithWindow.Initialize(picker, handler);
+
+        var folder = await picker.PickSingleFolderAsync();
+        if (folder != null)
+        {
+            // Application now has read/write access to all contents in the picked folder
+            // (including other sub-folder contents)
+            //Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
+            await SendFilesAsync([folder.Path]);
+        }
+
     }
 }

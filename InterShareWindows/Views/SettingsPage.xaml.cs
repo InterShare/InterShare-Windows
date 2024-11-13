@@ -21,6 +21,7 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         DataContext = ViewModel;
+        ViewModel.NoUpdatesFoundTextVisible = false;
         
         InitializeComponent();
     }

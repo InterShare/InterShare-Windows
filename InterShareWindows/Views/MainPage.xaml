@@ -42,52 +42,89 @@ mc:Ignorable="d">
 
         <Grid x:Name="ContentArea" Visibility="{x:Bind ViewModel.BluetoothEnabled, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="55" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            
+            <Grid VerticalAlignment="Stretch" Padding="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Margin="0, 0, 0, 10" VerticalAlignment="Center"  CornerRadius="10" HorizontalAlignment="Center" Padding="5">
+                    <StackPanel Opacity="0.6">
+                        <FontIcon Margin="0, 0, 0, 10" Glyph="&#xE896;" />
+                        <TextBlock FontWeight="Bold" HorizontalTextAlignment="Center">
+                            Ready to receive
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
 
                 <StackPanel
-                    Orientation="Horizontal"
-                    VerticalAlignment="Center"
-                    Padding="10, 0, 5, 0">
-                    <Button Padding="8"
-                    Command="{x:Bind ViewModel.SendFileCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Document" />
-                            <TextBlock Margin="10, 0, 0, 0" Text="Share Files" />
-                        </StackPanel>
-                    </Button>
-                    <!--<Button Padding="8"
-                            Margin="5,0,0,0"
+                    Grid.Row="1"
+                    VerticalAlignment="Center">
+
+                    <TextBlock Margin="0, 0, 0, 5" FontWeight="Bold" Opacity="0.7" HorizontalTextAlignment="Center">
+                        Share
+                    </TextBlock>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button HorizontalAlignment="Stretch" Padding="8" Command="{x:Bind ViewModel.SendFileCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Document" />
+                                <TextBlock Margin="10, 0, 0, 0" Text="Files" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="5, 0, 0, 0" Padding="8"
+                                Command="{x:Bind ViewModel.SendFolderCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Folder" />
+                                <TextBlock Margin="10, 0, 0, 0" Text="Folders" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <!--<Button HorizontalAlignment="Stretch" Padding="8"
+                            Margin="0, 5, 0, 0"
+                            IsEnabled="False"
                             Command="{x:Bind ViewModel.SendClipCommand}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Copy" />
-                            <TextBlock Margin="10, 0, 0, 0" Text="Share Clipboard" />
+                            <TextBlock Margin="10, 0, 0, 0" Text="Clipboard" />
                         </StackPanel>
                     </Button>-->
-                </StackPanel>
+                    <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            Margin="0, 10, 0, 0"
+                            Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
+                            BorderBrush="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}"
+                            Command="{x:Bind ViewModel.OpenSettingsPageCommand}">
 
-                <Button Grid.Column="1"
-                    VerticalAlignment="Center"
-                    Margin="0, 0, 10, 0"
-                    Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
-                    BorderBrush="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}"
-                    Command="{x:Bind ViewModel.OpenSettingsPageCommand}">
-                    <AnimatedIcon Width="20">
-                        <AnimatedIcon.Source>
-                            <animatedVisuals:AnimatedSettingsVisualSource/>
-                        </AnimatedIcon.Source>
-                        <AnimatedIcon.FallbackIconSource>
-                            <SymbolIconSource Symbol="Setting" />
-                        </AnimatedIcon.FallbackIconSource>
-                    </AnimatedIcon>
-                </Button>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <AnimatedIcon Width="20">
+                                <AnimatedIcon.Source>
+                                    <animatedVisuals:AnimatedSettingsVisualSource/>
+                                </AnimatedIcon.Source>
+                                <AnimatedIcon.FallbackIconSource>
+                                    <SymbolIconSource Symbol="Setting" />
+                                </AnimatedIcon.FallbackIconSource>
+                            </AnimatedIcon>
+                            <TextBlock Margin="10, 0, 0, 0" Text="Settings" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
 
             <Grid
@@ -96,25 +133,25 @@ mc:Ignorable="d">
                 DragEnter="OnDragOver"
                 DragLeave="OnDragLeave"
                 Drop="OnDrop"
-                Background="Transparent"
-                Grid.Row="1"
-                BorderThickness="0, 1, 0, 0"
-                Margin="10, 0, 10, 10"
-                CornerRadius="10">
+                Grid.Column="1"
+                CornerRadius="10"
+                Margin="5, 0, 5, 5">
 
                 <Border
+                    CornerRadius="10"
                     Opacity="0.3"
+                    Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}"
                     BorderThickness="1"
-                    CornerRadius="10"
                     />
+
 
                 <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontWeight="Bold"
                     Opacity="0.7">
-                    Drop files here to share
+                    Drop files or folders here to share
                 </TextBlock>
             </Grid>
         </Grid>

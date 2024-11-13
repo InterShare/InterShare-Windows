@@ -3,8 +3,11 @@ using InterShareWindows.Data;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 using System;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace InterShareWindows.Services;
 
@@ -113,8 +116,30 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
             }
             else if (action == "decline")
             {
-                //await sender.RemoveAllAsync();
+                _currentConnectionRequest.Decline();
             }
+            else if (action == "cancel")
+            {
+                _currentConnectionRequest.Cancel();
+            }
+            else if (action == "open-downloads")
+            {
+
+                try
+                {
+                    string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+                    Process.Start("explorer.exe", downloadsPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to open Downloads folder: {ex.Message}");
+                }
+            }
+        }
+        else
+        {
+            _currentConnectionRequest?.Decline();
+            _currentConnectionRequest = null;
         }
     }
 
@@ -177,13 +202,18 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
                 }
                 if (progress is ReceiveProgressState.Finished)
                 {
-                    await AppNotificationManager.Default.UpdateAsync(new AppNotificationProgressData(1)
-                    {
-                        SequenceNumber = _sequenceNumber,
-                        Value = 1.0,
-                        ValueStringOverride = "100.00 %",
-                        Status = "Finished"
-                    }, _notificationTag);
+                    await AppNotificationManager.Default.RemoveAllAsync();
+
+                    var builder = new AppNotificationBuilder()
+                        .AddText("Finished Transfer")
+                        .AddButton(new AppNotificationButton("Open Downloads")
+                            .AddArgument("action", "open-downloads"))
+                        .SetDuration(AppNotificationDuration.Long)
+                        .SetScenario(AppNotificationScenario.Urgent);
+
+                    var notification = builder.BuildNotification();
+
+                    AppNotificationManager.Default.Show(notification);
 
                     _startedNotificationLoop = false;
                     _currentConnectionRequest = null;
@@ -191,6 +221,17 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
                 }
                 if (progress is ReceiveProgressState.Cancelled)
                 {
+                    await AppNotificationManager.Default.RemoveAllAsync();
+
+                    var builder = new AppNotificationBuilder()
+                        .AddText("Transfer cancelled")
+                        .SetDuration(AppNotificationDuration.Long)
+                        .SetScenario(AppNotificationScenario.Urgent);
+
+                    var notification = builder.BuildNotification();
+
+                    AppNotificationManager.Default.Show(notification);
+
                     _startedNotificationLoop = false;
                     _currentConnectionRequest = null;
                     return;

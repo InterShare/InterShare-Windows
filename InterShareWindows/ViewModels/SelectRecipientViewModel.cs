@@ -11,6 +11,7 @@ using InterShareWindows.Params;
 using System;
 using static InterShareSdk.ConnectErrors;
 using Microsoft.UI.Xaml.Controls;
+using System.Linq;
 
 namespace InterShareWindows.ViewModels;
 
@@ -52,7 +53,12 @@ public partial class SelectRecipientViewModel : ViewModelBase, DiscoveryDelegate
 
     public void DeviceAdded(Device value)
     {
-        _uiContext.Post(_ => Devices.Add(new DiscoveredDevice(new SendProgress(_uiContext), value)), null);
+        _uiContext.Post(_ => {
+            if (Devices.FirstOrDefault(device => device.Device.id == value.id) == null)
+            {
+                Devices.Add(new DiscoveredDevice(new SendProgress(_uiContext), value));
+            }
+        }, null);
     }
 
     public void DeviceRemoved(string deviceId)
@@ -72,15 +78,16 @@ public partial class SelectRecipientViewModel : ViewModelBase, DiscoveryDelegate
             }
             catch (ConnectErrors error)
             {
+                if (error is InternalBleHandlerNotAvailable)
+                {
+                    ShowBleNotAvailableDialog.Invoke();
+                }
+
                 _uiContext.Post(_ =>
                 {
                     device.Progress.State = new SendProgressState.Unknown();
                 }, null);
 
-                if (error is InternalBleHandlerNotAvailable)
-                {
-                    ShowBleNotAvailableDialog.Invoke();
-                }
             }
             catch (Exception)
             {

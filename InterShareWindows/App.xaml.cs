@@ -76,30 +76,6 @@ namespace InterShareWindows
 
             return service;
         }
-        private static async Task UpdateMyApp()
-        {
-            try
-            {
-                var mgr = new UpdateManager("https://intershare.app/windows-download");
-
-                // check for new version
-                var newVersion = await mgr.CheckForUpdatesAsync();
-                if (newVersion == null)
-                {
-                    return;
-                }
-
-                // download new version
-                await mgr.DownloadUpdatesAsync(newVersion);
-
-                // install new version and restart app
-                mgr.ApplyUpdatesAndRestart(newVersion);
-            }
-            catch (Exception exception)
-            {
-                Console.Error.WriteLine(exception);
-            }
-        }
 
         /// <summary>
         /// Invoked when the application is launched.
@@ -111,7 +87,7 @@ namespace InterShareWindows
             nearbyService.Initialize();
 
             await GetService<ActivationService>().ActivateAsync(args);
-            await UpdateMyApp();
+            await GetService<UpdateService>().Update();
         }
 
         void OnProcessExit(object sender, EventArgs e)

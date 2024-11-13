@@ -38,9 +38,9 @@ namespace InterShareWindows
         {
             this.InitializeComponent();
             SystemBackdrop = new MicaBackdrop();
-            this.SetWindowSize(480, 350);
-            MinWidth = 400;
-            MinHeight = 300;
+            this.SetWindowSize(600, 370);
+            MinWidth = 600;
+            MinHeight = 370;
             this.SetIsMaximizable(false);
 
             ExtendsContentIntoTitleBar = true;
