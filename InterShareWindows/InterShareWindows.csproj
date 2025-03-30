@@ -47,7 +47,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview1" />
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.0.230907" />
-    <PackageReference Include="InterShareSdk" Version="0.1.1-beta.13" />
+    <PackageReference Include="InterShareSdk" Version="0.1.2-beta.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-rc.2.24473.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-rc.2.24473.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-rc.2.24473.5" />

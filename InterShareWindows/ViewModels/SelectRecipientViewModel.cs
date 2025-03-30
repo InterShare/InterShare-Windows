@@ -17,7 +17,7 @@ namespace InterShareWindows.ViewModels;
 
 public delegate void ShowDialogEvent();
 
-public partial class SelectRecipientViewModel : ViewModelBase, DiscoveryDelegate
+public partial class SelectRecipientViewModel : ViewModelBase, IDiscoveryDelegate
 {
     private readonly Discovery _discovery;
     private readonly NearbyService _nearbyService;
