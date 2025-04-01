@@ -80,7 +80,7 @@ mc:Ignorable="d">
                 BorderThickness="1"
                 CornerRadius="10">
                 <StackPanel HorizontalAlignment="Center">
-                    <TextBlock Opacity="0.7" HorizontalTextAlignment="Center">Copyright 2024 Julian Baumann</TextBlock>
+                    <TextBlock Opacity="0.7" HorizontalTextAlignment="Center">Copyright 2021-2025 Julian Baumann</TextBlock>
                     <TextBlock Opacity="0.7" HorizontalTextAlignment="Center">
                         <TextBlock.Inlines>
                             <Run>Version:</Run>

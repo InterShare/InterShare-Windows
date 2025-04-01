@@ -1,11 +1,6 @@
 ﻿using InterShareSdk;
-using InterShareWindows.Data;
 using Microsoft.UI.Xaml.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterShareWindows.Views.Converters;
 
@@ -20,7 +15,11 @@ class ProgressRingIsIndeterminateConverter : IValueConverter
             return true;
         }
 
-        if (progress is SendProgressState.Transferring or SendProgressState.Finished)
+        if (progress
+            is SendProgressState.Transferring
+            or SendProgressState.Finished
+            or SendProgressState.Cancelled
+            or SendProgressState.Declined)
         {
             return false;
         }

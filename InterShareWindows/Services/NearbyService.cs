@@ -6,8 +6,9 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace InterShareWindows.Services;
 
@@ -33,9 +34,11 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
     private uint _sequenceNumber = 1;
     private string _notificationTag;
     private uint _notificationId;
+    private readonly SynchronizationContext _uiContext;
 
     public NearbyService()
     {
+        _uiContext = SynchronizationContext.Current!;
     }
 
     public void Start()
@@ -66,6 +69,33 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
             .SetDuration(AppNotificationDuration.Long)
             .SetScenario(AppNotificationScenario.Urgent);
 
+        var notification = builder.BuildNotification();
+
+        AppNotificationManager.Default.Show(notification);
+        _notificationId = notification.Id;
+    }
+    
+    public void SendClipboardNotification()
+    {
+        var sender = _currentConnectionRequest?.GetSender().name ?? "Unknown";
+        var clipboardIntent = _currentConnectionRequest?.GetClipboardIntent();
+        var isLink = _currentConnectionRequest?.IsLink() ?? false;
+
+        var text = $"{sender} has shared this text: {clipboardIntent?.clipboardContent}";
+
+        var builder = new AppNotificationBuilder()
+            .AddText(text)
+            .AddButton(new AppNotificationButton("Copy")
+                .AddArgument("action", "copy"))
+            .SetDuration(AppNotificationDuration.Long)
+            .SetScenario(AppNotificationScenario.Urgent);
+
+        if (isLink)
+        {
+            builder.AddButton(new AppNotificationButton("Open Link")
+                .AddArgument("action", "open-link"));
+        }
+        
         var notification = builder.BuildNotification();
 
         AppNotificationManager.Default.Show(notification);
@@ -116,11 +146,36 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
             }
             else if (action == "decline")
             {
-                _currentConnectionRequest.Decline();
+                _currentConnectionRequest?.Decline();
+            }
+            else if (action == "copy")
+            {
+                _currentConnectionRequest?.Accept();
+                var text = _currentConnectionRequest?.GetClipboardIntent()?.clipboardContent;
+                
+                _uiContext.Post(_ => {
+                    var package = new DataPackage();
+                    package.SetText(text);
+                    Clipboard.SetContent(package);
+                }, null);
+                
+                _currentConnectionRequest = null;
+            }
+            else if (action == "open-link")
+            {
+                _currentConnectionRequest?.Accept();
+                var url = _currentConnectionRequest?.GetClipboardIntent()?.clipboardContent; 
+
+                if (url != null)
+                {
+                    _ = await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
+                }
+                
+                _currentConnectionRequest = null;
             }
             else if (action == "cancel")
             {
-                _currentConnectionRequest.Cancel();
+                _currentConnectionRequest?.Cancel();
             }
             else if (action == "open-downloads")
             {
@@ -152,7 +207,15 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
         }
 
         _currentConnectionRequest = request;
-        SendUpdatableToastWithProgress();
+
+        if (_currentConnectionRequest?.GetIntentType() is ConnectionIntentType.Clipboard)
+        {
+            SendClipboardNotification();
+        }
+        else
+        {
+            SendUpdatableToastWithProgress();
+        }
     }
 
     private void UpdateNotificationLoop()

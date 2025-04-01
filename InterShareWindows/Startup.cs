@@ -1,13 +1,9 @@
 using InterShareWindows.Activation;
-using InterShareWindows.Data;
 using InterShareWindows.Services;
 using InterShareWindows.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
-using System;
-using System.IO;
-using System.IO.Pipes;
 
 namespace InterShareWindows;
 

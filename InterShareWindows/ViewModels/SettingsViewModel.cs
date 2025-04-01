@@ -1,18 +1,10 @@
 // SettingsViewModel.cs
 
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
-using Windows.Devices.Sms;
-using Windows.Storage;
-using ABI.Windows.Security.ExchangeActiveSyncProvisioning;
 using CommunityToolkit.Mvvm.Input;
 using InterShareWindows.Data;
 using InterShareWindows.Services;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using DeviceInformation = ABI.Windows.Devices.Enumeration.DeviceInformation;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Reflection;
 using System.Text.RegularExpressions;

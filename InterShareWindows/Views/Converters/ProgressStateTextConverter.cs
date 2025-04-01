@@ -1,14 +1,10 @@
 ﻿using InterShareSdk;
-using InterShareWindows.Data;
 using Microsoft.UI.Xaml.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterShareWindows.Views.Converters;
-class ProgressStateTextConverter : IValueConverter
+
+internal partial class ProgressStateTextConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
@@ -26,10 +22,6 @@ class ProgressStateTextConverter : IValueConverter
         else if (progress is SendProgressState.Connecting)
         {
             return "Connecting";
-        }
-        else if (progress is SendProgressState.Compressing)
-        {
-            return "Compressing";
         }
         else if (progress is SendProgressState.Requesting)
         {

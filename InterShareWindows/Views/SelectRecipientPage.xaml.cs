@@ -1,14 +1,10 @@
 using System;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using InterShareWindows.Params;
 using InterShareWindows.ViewModels;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using WinUIEx;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace InterShareWindows.Views;
 
@@ -21,11 +17,12 @@ public sealed partial class SelectRecipientPage : Page
     
     public SelectRecipientPage()
     {
-        _uiContext = SynchronizationContext.Current;
+        _uiContext = SynchronizationContext.Current!;
         ViewModel = App.GetService<SelectRecipientViewModel>();
         ViewModel.ShowBleNotAvailableDialog += ShowBleNotAvailableDialog;
         DataContext = ViewModel;
         ViewModel.Reset();
+        
         InitializeComponent();
     }
 
@@ -38,7 +35,7 @@ public sealed partial class SelectRecipientPage : Page
 
         _isDialogOpen = true;
 
-        _uiContext.Post(async _ => {
+        _uiContext.Post(async void (_) => {
             try
             {
                 ContentDialog noBleDialog = new ContentDialog
@@ -53,7 +50,7 @@ public sealed partial class SelectRecipientPage : Page
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Error showing ContentDialog: {ex}");
+                await Console.Error.WriteLineAsync($"Error showing ContentDialog: {ex}");
             }
             finally
             {
@@ -78,5 +75,10 @@ public sealed partial class SelectRecipientPage : Page
         }
 
         ViewModel.SendParam = e.Parameter as SendParam;
+        
+        Task.Run(async () =>
+        {
+            await ViewModel.Prepare();
+        });
     }
 }
