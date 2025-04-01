@@ -2,9 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using InterShareWindows.Services;
-using Microsoft.UI.Xaml.Controls;
 
 namespace InterShareWindows.ViewModels;
 

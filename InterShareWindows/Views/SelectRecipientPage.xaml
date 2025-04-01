@@ -18,8 +18,15 @@
         <converters:ProgressRingConverter x:Key="ProgressRingConverter"/>
         <converters:ProgressRingIsIndeterminateConverter x:Key="ProgressRingIsIndeterminateConverter"/>
         <converters:ProgressRingActiveConverter x:Key="ProgressRingActiveConverter"/>
+        <converters:ProgressRingColorConverter x:Key="ProgressRingColorConverter"/>
+        <converters:ProgressRingBackgroundColorConverter x:Key="ProgressRingBackgroundColorConverter"/>
         <converters:ProgressStateTextConverter x:Key="ProgressStateTextConverter"/>
         <converters:ScaleConverter x:Key="ScaleConverter"/>
+        <converters:ShareProgressIsActiveVisibilityConverter x:Key="ShareProgressIsActiveVisibilityConverter"/>
+        <converters:ShareProgressIsInactiveVisibilityConverter x:Key="ShareProgressIsInactiveVisibilityConverter"/>
+        <converters:ShareProgressTextConverter x:Key="ShareProgressTextConverter"/>
+        <converters:ShareProgressButtonEnabledConverter x:Key="ShareProgressButtonEnabledConverter"/>
+        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent"/>
     </Page.Resources>
 
     <Grid>
@@ -44,6 +51,7 @@
                             Padding="5"
                             Width="100"
                             Height="100"
+                            IsEnabled="{Binding DataContext.ShareProgress.State, ElementName=DevicesList, Converter={StaticResource ShareProgressButtonEnabledConverter}}"
                             VerticalContentAlignment="Center"
                             Background="Transparent"
                             BorderThickness="0">
@@ -53,6 +61,8 @@
                                         IsActive="{x:Bind Progress.State, Converter={StaticResource ProgressRingActiveConverter}, Mode=OneWay}"
                                         IsIndeterminate="{x:Bind Progress.State, Converter={StaticResource ProgressRingIsIndeterminateConverter}, Mode=OneWay}"
                                         Value="{x:Bind Progress.State, Converter={StaticResource ProgressRingConverter}, Mode=OneWay}"
+                                        Foreground="{x:Bind Progress.State, Converter={StaticResource ProgressRingColorConverter}, Mode=OneWay}"
+                                        Background="{x:Bind Progress.State, Converter={StaticResource ProgressRingBackgroundColorConverter}, Mode=OneWay}"
                                         Width="50"
                                         Height="50"
                                         HorizontalAlignment="Center"
@@ -99,17 +109,40 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <Border Grid.Row="1" Margin="0" Padding="10">
+        <Border
+            Grid.Row="1"
+            Margin="0"
+            Padding="10">
             <Grid ColumnDefinitions="Auto, *">
-                <ProgressRing Margin="10, 0" IsActive="True" Height="20" Width="20" Grid.Column="0" VerticalAlignment="Center"/>
+                <ProgressRing
+                    Grid.Column="0"
+                    Margin="10, 0"
+                    IsActive="True"
+                    Height="20"
+                    Width="20"
+                    VerticalAlignment="Center" />
 
                 <StackPanel Grid.Column="1">
-                    <TextBlock FontWeight="Bold">Looking for nearby devices</TextBlock>
                     <TextBlock
+                        Visibility="{x:Bind ViewModel.ShareProgress.State, Converter={StaticResource ShareProgressIsInactiveVisibilityConverter}, Mode=OneWay}"
+                        FontWeight="Bold">Looking for nearby devices</TextBlock>
+                    <TextBlock
+                        Visibility="{x:Bind ViewModel.ShareProgress.State, Converter={StaticResource ShareProgressIsInactiveVisibilityConverter}, Mode=OneWay}"
                         Opacity="0.7"
                         TextWrapping="Wrap"
                         MaxLines="3">
                         Make sure the receiver has the InterShare app open on their device.
+                    </TextBlock>
+                    
+                    <TextBlock
+                        Visibility="{x:Bind ViewModel.ShareProgress.State, Converter={StaticResource ShareProgressIsActiveVisibilityConverter}, Mode=OneWay}"
+                        FontWeight="Bold">Preparing files...</TextBlock>
+                    <TextBlock
+                        Visibility="{x:Bind ViewModel.ShareProgress.State, Converter={StaticResource ShareProgressIsActiveVisibilityConverter}, Mode=OneWay}"
+                        Opacity="0.7"
+                        TextWrapping="Wrap"
+                        MaxLines="3"
+                        Text="{x:Bind ViewModel.ShareProgress.State, Converter={StaticResource ShareProgressTextConverter}, Mode=OneWay}">
                     </TextBlock>
                 </StackPanel>
             </Grid>

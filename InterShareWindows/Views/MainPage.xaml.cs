@@ -8,7 +8,6 @@ using Microsoft.UI.Xaml.Media;
 using System.Collections.Generic;
 using Windows.Storage;
 using System;
-using System.Linq;
 using InterShareWindows.Data;
 
 namespace InterShareWindows.Views;
@@ -81,7 +80,7 @@ public sealed partial class MainPage : Page
                 }
             }
 
-            await ViewModel.SendFilesAsync(paths);
+            ViewModel.SendFiles(paths);
         }
     }
 }

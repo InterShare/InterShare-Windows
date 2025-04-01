@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>InterShareWindows</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -12,7 +12,7 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <UseRidGraph>true</UseRidGraph>
-    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <PackageCertificateThumbprint>F525DC1A5A0C545748F55C3EA8609AF2C830E9EB</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
@@ -27,6 +27,8 @@
 	<ApplicationIcon>InterShare.ico</ApplicationIcon>
 	<AssemblyName>InterShare</AssemblyName>
     <Version>0.0.0-dev</Version>
+    <Nullable>enable</Nullable>
+    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\UpdateWindow.xaml" />
@@ -39,25 +41,23 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <EmbeddedResource Include="InterShare.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Content Include="InterShare.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview1" />
-    <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.0.230907" />
-    <PackageReference Include="InterShareSdk" Version="0.1.1-beta.13" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-rc.2.24473.5" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-rc.2.24473.5" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-rc.2.24473.5" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0-rc.2.24473.5" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240923002" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.250129-preview2" />
+    <PackageReference Include="InterShareSdk" Version="0.1.2-beta.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250310001" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <Manifest Include="$(ApplicationManifest)" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0-rc.2.24473.5" />
-    <PackageReference Include="Velopack" Version="0.0.869" />
-    <PackageReference Include="WinUIEx" Version="2.4.2" />
+    <PackageReference Include="System.Text.Json" Version="9.0.3" />
+    <PackageReference Include="Velopack" Version="0.0.1053" />
+    <PackageReference Include="WinUIEx" Version="2.5.1" />
   </ItemGroup>
 
   <!--

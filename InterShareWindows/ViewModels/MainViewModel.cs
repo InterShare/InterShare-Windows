@@ -1,23 +1,18 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using Windows.Storage.Pickers;
-using Windows.UI.Core;
-using ABI.System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using InterShareWindows.Params;
 using InterShareWindows.Services;
-using Microsoft.UI.Xaml;
 using WinRT.Interop;
 using WinUIEx;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.UI.Xaml.Controls;
+using System.IO;
 using Windows.Devices.Radios;
 using CommunityToolkit.Mvvm.ComponentModel;
-using InterShareSdk;
 using System.Threading;
+using Windows.ApplicationModel.DataTransfer;
 using InterShareWindows.Data;
 
 namespace InterShareWindows.ViewModels;
@@ -28,9 +23,6 @@ public partial class MainViewModel : ViewModelBase
     private NearbyService _nearbyServer;
     private Radio _bluetoothRadio;
     private readonly NavigationService _navigationService;
-    public readonly AsyncRelayCommand SendFileCommand;
-    public readonly AsyncRelayCommand SendClipCommand;
-    public readonly RelayCommand OpenSettingsPageCommand;
 
     [ObservableProperty]
     private bool _bluetoothEnabled = true;
@@ -43,9 +35,6 @@ public partial class MainViewModel : ViewModelBase
         _uiContext = SynchronizationContext.Current;
         _nearbyServer = nearbyServer;
         _navigationService = navigationService;
-        SendFileCommand = new AsyncRelayCommand(SendFileAsync);
-        SendClipCommand = new AsyncRelayCommand(SendClipboardAsync);
-        OpenSettingsPageCommand = new RelayCommand(OpenSettingsPage);
         DeviceName = LocalStorage.DeviceName;
 
         CheckBluetooth();
@@ -85,12 +74,14 @@ public partial class MainViewModel : ViewModelBase
         }, null);
     }
 
+    [RelayCommand]
     private void OpenSettingsPage()
     {
         _navigationService.NavigateTo("InterShareWindows.ViewModels.SettingsViewModel");
     }
 
-    private async Task SendFileAsync()
+    [RelayCommand]
+    private async Task SendFiles()
     {
         var picker = new FileOpenPicker
         {
@@ -105,15 +96,10 @@ public partial class MainViewModel : ViewModelBase
 
         var files = await picker.PickMultipleFilesAsync();
 
-        await SendFilesAsync(files.Select(file => file.Path).ToList());
+        SendFiles(files.Select(file => file.Path).ToList());
     }
 
-    private Task SendClipboardAsync()
-    {
-        return SendFilesAsync([]);
-    }
-
-    public async Task SendFilesAsync(List<string> filePaths)
+    public void SendFiles(List<string> filePaths)
     {
         if (filePaths.Count <= 0)
         {
@@ -126,14 +112,11 @@ public partial class MainViewModel : ViewModelBase
         };
 
         _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel", sendParameters);
-
-        await Task.CompletedTask;
     }
 
     [RelayCommand]
     public async Task SendFolder()
     {
-
         var picker = new FolderPicker
         {
         };
@@ -146,9 +129,52 @@ public partial class MainViewModel : ViewModelBase
         {
             // Application now has read/write access to all contents in the picked folder
             // (including other sub-folder contents)
-            //Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-            await SendFilesAsync([folder.Path]);
+            // Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
+            SendFiles([folder.Path]);
+        }
+    }
+    
+    [RelayCommand]
+    private async Task SendClipboard()
+    {
+        var package = Clipboard.GetContent();
+
+        if (package.Contains(StandardDataFormats.StorageItems))
+        {
+            var storageItems = await package.GetStorageItemsAsync();
+            var files = storageItems.Select(item => item.Path);
+
+            SendFiles(files.ToList());
+        }
+        
+        if (package.Contains(StandardDataFormats.Bitmap))
+        {
+            var bitmap = await package.GetBitmapAsync();
+
+            if (bitmap != null)
+            {
+                using var storageItemStream = await bitmap.OpenReadAsync();
+                var tempFile = System.IO.Path.Combine(System.IO.Path.GetTempPath(), Guid.NewGuid() + ".png");
+                await using var fileStream = File.OpenWrite(tempFile);
+                await storageItemStream.AsStreamForRead().CopyToAsync(fileStream);
+
+                SendFiles([tempFile]);
+            }
         }
 
+        if (package.Contains(StandardDataFormats.Text))
+        {
+            var text = await package.GetTextAsync();
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                var sendParameters = new SendParam
+                {
+                    ClipboardContent = text
+                };
+
+                _navigationService.NavigateTo("InterShareWindows.ViewModels.SelectRecipientViewModel", sendParameters);   
+            }
+        }
     }
 }

@@ -4,5 +4,6 @@ namespace InterShareWindows.Params;
 
 public class SendParam
 {
-    public List<string> FilePaths { get; set; }
+    public List<string>? FilePaths { get; set; }
+    public string? ClipboardContent { get; set; }
 }

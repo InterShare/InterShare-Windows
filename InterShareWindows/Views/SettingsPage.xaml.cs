@@ -1,12 +1,5 @@
-using System;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using InterShareWindows.Data;
 using InterShareWindows.ViewModels;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using WinUIEx;
 
 namespace InterShareWindows.Views;
 

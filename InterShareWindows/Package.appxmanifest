@@ -7,17 +7,17 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
-  IgnorableNamespaces="uap rescap">
+  IgnorableNamespaces="uap rescap com desktop">
 
   <Identity
-    Name="fca9335b-be30-4e35-b960-6a39232bc2ec"
-    Publisher="CN=Julian Baumann"
+    Name="JulianBaumann.InterShare-SimpleSharing"
+    Publisher="CN=E61B5B99-6B3D-4EBD-A242-48C8679F6DD9"
     Version="0.1.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="fca9335b-be30-4e35-b960-6a39232bc2ec" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="85e67d6a-2f85-416f-8a1b-eaceb1791ed0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>InterShare</DisplayName>
+    <DisplayName>InterShare - Simple Sharing</DisplayName>
     <PublisherDisplayName>Julian Baumann</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -44,7 +44,7 @@
 		</desktop:Extension>
 		<com:Extension Category="windows.comServer">
 			<com:ComServer>
-				<com:ExeServer Executable="InterShareWindows.exe" DisplayName="InterShare" Arguments="----AppNotificationActivated:">
+				<com:ExeServer Executable="InterShare.exe" DisplayName="InterShare" Arguments="----AppNotificationActivated:">
 					<com:Class Id="561BA616-1795-4121-B212-C173E6ADF0C3" />
 				</com:ExeServer>
 			</com:ComServer>

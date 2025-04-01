@@ -46,7 +46,7 @@ mc:Ignorable="d">
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240"></ColumnDefinition>
+                <ColumnDefinition Width="260"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
@@ -59,7 +59,7 @@ mc:Ignorable="d">
 
                 <Border Margin="0, 0, 0, 10" VerticalAlignment="Center"  CornerRadius="10" HorizontalAlignment="Center" Padding="5">
                     <StackPanel Opacity="0.6">
-                        <FontIcon Margin="0, 0, 0, 10" Glyph="&#xE896;" />
+                        <FontIcon Margin="0, 0, 0, 10" Glyph="&#xE704;" />
                         <TextBlock FontWeight="Bold" HorizontalTextAlignment="Center">
                             Ready to receive
                         </TextBlock>
@@ -78,40 +78,38 @@ mc:Ignorable="d">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Button HorizontalAlignment="Stretch" Padding="8" Command="{x:Bind ViewModel.SendFileCommand}">
-                            <StackPanel Orientation="Horizontal">
+                        <Button HorizontalAlignment="Stretch" Padding="8" Command="{x:Bind ViewModel.SendFilesCommand}">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <SymbolIcon Symbol="Document" />
-                                <TextBlock Margin="10, 0, 0, 0" Text="Files" />
+                                <TextBlock Text="Files" />
                             </StackPanel>
                         </Button>
 
-                        <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="5, 0, 0, 0" Padding="8"
+                        <Button Grid.Column="1" HorizontalAlignment="Stretch" Margin="5, 0, 5, 0" Padding="8"
                                 Command="{x:Bind ViewModel.SendFolderCommand}">
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <SymbolIcon Symbol="Folder" />
-                                <TextBlock Margin="10, 0, 0, 0" Text="Folders" />
+                                <TextBlock Text="Folders" />
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Grid.Column="2" HorizontalAlignment="Stretch" Padding="8" Command="{x:Bind ViewModel.SendClipboardCommand}">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <SymbolIcon Symbol="Paste" />
+                                <TextBlock Text="Clipboard" />
                             </StackPanel>
                         </Button>
                     </Grid>
-
-                    <!--<Button HorizontalAlignment="Stretch" Padding="8"
-                            Margin="0, 5, 0, 0"
-                            IsEnabled="False"
-                            Command="{x:Bind ViewModel.SendClipCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Copy" />
-                            <TextBlock Margin="10, 0, 0, 0" Text="Clipboard" />
-                        </StackPanel>
-                    </Button>-->
+                    
                     <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Column="1"
                             HorizontalContentAlignment="Center"
                             Margin="0, 10, 0, 0"
                             Height="38" Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
                             BorderBrush="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}"
                             Command="{x:Bind ViewModel.OpenSettingsPageCommand}">
-
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <AnimatedIcon Width="20">
                                 <AnimatedIcon.Source>

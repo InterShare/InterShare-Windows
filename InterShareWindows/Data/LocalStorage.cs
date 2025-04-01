@@ -1,8 +1,5 @@
 using System;
-using Windows.Storage;
-using ABI.Windows.Foundation;
 using System.IO;
-using System.Text.Json.Serialization;
 using System.Text.Json;
 
 namespace InterShareWindows.Data;
@@ -23,10 +20,7 @@ public static class LocalStorage
 
     private static SettingsFile CurrentSettings
     {
-        get
-        {
-            return GetSettings();
-        }
+        get => GetSettings();
         set
         {
             if (_currentSettings == null)

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using InterShareWindows.Activation;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 
 namespace InterShareWindows.Services;
 

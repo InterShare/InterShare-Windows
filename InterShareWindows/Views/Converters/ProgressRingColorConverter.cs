@@ -1,10 +1,12 @@
 ﻿using InterShareSdk;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Media;
 using System;
 
 namespace InterShareWindows.Views.Converters;
 
-class ProgressRingConverter : IValueConverter
+public class ProgressRingColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
@@ -12,23 +14,20 @@ class ProgressRingConverter : IValueConverter
 
         if (progress == null)
         {
-            return 0.0;
+            return new SolidColorBrush(Colors.MediumPurple);
         }
 
-        if (progress is SendProgressState.Transferring)
+        if (progress is SendProgressState.Finished)
         {
-            var transferringState = progress as SendProgressState.Transferring;
-            return transferringState.progress * 100;
-        }
-        if (progress
-            is SendProgressState.Finished
-            or SendProgressState.Cancelled
-            or SendProgressState.Declined)
-        {
-            return 100.0;
+            return new SolidColorBrush(Colors.LimeGreen);
         }
 
-        return 0.0;
+        if (progress is SendProgressState.Cancelled or SendProgressState.Declined)
+        {
+            return new SolidColorBrush(Colors.IndianRed);
+        }
+
+        return new SolidColorBrush(Colors.MediumPurple);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)

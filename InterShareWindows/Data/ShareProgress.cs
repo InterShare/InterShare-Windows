@@ -1,20 +1,21 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using InterShareSdk;
 using System.Threading;
 using System.Timers;
 
 namespace InterShareWindows.Data;
 
-public partial class SendProgress : ObservableObject, SendProgressDelegate
+public partial class ShareProgress : ObservableObject, ShareProgressDelegate
 {
     private SynchronizationContext _uiContext;
-    private SendProgressState _latestState;
+    private ShareProgressState _latestState;
     private readonly System.Timers.Timer _updateTimer;
 
     [ObservableProperty]
-    private SendProgressState _state;
+    private ShareProgressState _state = new ShareProgressState.Unknown();
 
-    public SendProgress(SynchronizationContext uiContext)
+    public ShareProgress(SynchronizationContext uiContext)
     {
         _uiContext = uiContext;
 
@@ -29,10 +30,11 @@ public partial class SendProgress : ObservableObject, SendProgressDelegate
         {
             // Update the UI with the latest state
             State = _latestState;
+            Console.WriteLine($"State: {State}");
         }, null);
     }
 
-    public void ProgressChanged(SendProgressState progress)
+    public void ProgressChanged(ShareProgressState progress)
     {
         _latestState = progress;
         if (!_updateTimer.Enabled)
