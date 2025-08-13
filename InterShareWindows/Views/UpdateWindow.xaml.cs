@@ -21,7 +21,7 @@ namespace InterShareWindows.Views
 
         public UpdateWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             ViewModel = App.GetService<UpdateWindowViewModel>();
             RootGrid.DataContext = ViewModel;
@@ -41,7 +41,7 @@ namespace InterShareWindows.Views
         public void GetAppWindowAndPresenter()
         {
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            WindowId myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            var myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
             _apw = AppWindow.GetFromWindowId(myWndId);
             _presenter = _apw.Presenter as OverlappedPresenter;
         }

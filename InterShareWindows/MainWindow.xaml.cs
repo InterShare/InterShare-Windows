@@ -21,7 +21,7 @@ namespace InterShareWindows
 
         public MainWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             // if (DesktopAcrylicController.IsSupported())
             // {

@@ -9,15 +9,13 @@ using System.Collections.Generic;
 using Windows.Storage;
 using System;
 using InterShareWindows.Data;
+using InterShareWindows.Helper;
 
 namespace InterShareWindows.Views;
 
 public sealed partial class MainPage : Page
 {
-    public MainViewModel ViewModel
-    {
-        get;
-    }
+    public MainViewModel ViewModel { get; }
 
     public MainPage()
     {
@@ -34,9 +32,9 @@ public sealed partial class MainPage : Page
         {
             LocalStorage.DidAlreadyShowBluetoothNote = true;
 
-            ContentDialog noBleDialog = new ContentDialog
+            var noBleDialog = new ContentDialog
             {
-                XamlRoot = this.Content.XamlRoot,
+                XamlRoot = Content.XamlRoot,
                 Title = "Please note:",
                 Content = "Due to technical limitations, sending and receiving files via Bluetooth on Windows is not possible. Please try connecting both devices to the same Wi-Fi network.",
                 CloseButtonText = "OK"

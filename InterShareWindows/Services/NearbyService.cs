@@ -17,7 +17,7 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
     private ConnectionRequest? _currentConnectionRequest;
     private ReceiveProgressState? _currentProgress;
     private bool _startedNotificationLoop = false;
-    private NearbyServer _nearbyServer;
+    private NearbyServer? _nearbyServer;
 
     public NearbyServer NearbyServer {
         get
@@ -32,14 +32,9 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
         }
     }
     private uint _sequenceNumber = 1;
-    private string _notificationTag;
+    private string? _notificationTag;
     private uint _notificationId;
-    private readonly SynchronizationContext _uiContext;
-
-    public NearbyService()
-    {
-        _uiContext = SynchronizationContext.Current!;
-    }
+    private readonly SynchronizationContext _uiContext = SynchronizationContext.Current!;
 
     public void Start()
     {
@@ -52,12 +47,12 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
         AppNotificationManager.Default.Register();
     }
 
-    public void SendUpdatableToastWithProgress()
+    private void SendUpdatableToastWithProgress()
     {
-        var sender = _currentConnectionRequest.GetSender().name ?? "Unknown";
-        var fileTransferIntent = _currentConnectionRequest.GetFileTransferIntent();
+        var sender = _currentConnectionRequest?.GetSender().name ?? "Unknown";
+        var fileTransferIntent = _currentConnectionRequest?.GetFileTransferIntent();
 
-        var files = fileTransferIntent.fileCount > 1 ? $"{fileTransferIntent.fileCount} files" : $"{fileTransferIntent.fileName}";
+        var files = fileTransferIntent?.fileCount > 1 ? $"{fileTransferIntent.fileCount} files" : $"{fileTransferIntent?.fileName}";
         var text = $"{sender} wants to send you {files}";
 
         var builder = new AppNotificationBuilder()
@@ -74,8 +69,8 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
         AppNotificationManager.Default.Show(notification);
         _notificationId = notification.Id;
     }
-    
-    public void SendClipboardNotification()
+
+    private void SendClipboardNotification()
     {
         var sender = _currentConnectionRequest?.GetSender().name ?? "Unknown";
         var clipboardIntent = _currentConnectionRequest?.GetClipboardIntent();
@@ -105,7 +100,7 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
     private async void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
     {
         await sender.RemoveByIdAsync(_notificationId);
-        await Task.Delay(500);
+        // await Task.Delay(500);
 
         if (args.Arguments.ContainsKey("action"))
         {
@@ -147,6 +142,7 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
             else if (action == "decline")
             {
                 _currentConnectionRequest?.Decline();
+                _currentConnectionRequest = null;
             }
             else if (action == "copy")
             {
@@ -176,13 +172,14 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
             else if (action == "cancel")
             {
                 _currentConnectionRequest?.Cancel();
+                _currentConnectionRequest = null;
             }
             else if (action == "open-downloads")
             {
 
                 try
                 {
-                    string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+                    var downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
                     Process.Start("explorer.exe", downloadsPath);
                 }
                 catch (Exception ex)

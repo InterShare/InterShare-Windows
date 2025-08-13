@@ -38,9 +38,9 @@ public sealed partial class SelectRecipientPage : Page
         _uiContext.Post(async void (_) => {
             try
             {
-                ContentDialog noBleDialog = new ContentDialog
+                var noBleDialog = new ContentDialog
                 {
-                    XamlRoot = this.Content.XamlRoot,
+                    XamlRoot = Content.XamlRoot,
                     Title = "Bluetooth not supported on Windows :(",
                     Content = "Due to technical limitations, sending files via Bluetooth on Windows is not possible. Please try connecting the receiver to the same Wi-Fi network.",
                     CloseButtonText = "OK"

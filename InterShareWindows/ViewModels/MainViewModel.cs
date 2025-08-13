@@ -14,18 +14,22 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading;
 using Windows.ApplicationModel.DataTransfer;
 using InterShareWindows.Data;
+using InterShareWindows.Helper;
 
 namespace InterShareWindows.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
     private readonly SynchronizationContext _uiContext;
-    private NearbyService _nearbyServer;
-    private Radio _bluetoothRadio;
+    private NearbyService? _nearbyServer;
+    private Radio? _bluetoothRadio;
     private readonly NavigationService _navigationService;
 
     [ObservableProperty]
     private bool _bluetoothEnabled = true;
+    
+    [ObservableProperty]
+    private bool _firewallBlocksInterShare;
 
     [ObservableProperty]
     private string _deviceName;
@@ -42,13 +46,33 @@ public partial class MainViewModel : ViewModelBase
 
     private async void CheckBluetooth()
     {
-        var radios = await Radio.GetRadiosAsync();
-        _bluetoothRadio = radios.FirstOrDefault(r => r.Kind == RadioKind.Bluetooth);
-
-        if (_bluetoothRadio != null)
+        try
         {
-            _bluetoothRadio.StateChanged += BluetoothRadio_StateChanged;
-            CheckBluetoothStateAsync();
+            var radios = await Radio.GetRadiosAsync();
+            _bluetoothRadio = radios?.FirstOrDefault(r => r.Kind == RadioKind.Bluetooth);
+
+            if (_bluetoothRadio != null)
+            {
+                _bluetoothRadio.StateChanged += BluetoothRadio_StateChanged;
+                CheckBluetoothStateAsync();
+            }
+        
+            FirewallBlocksInterShare = !FirewallChecker.IsProgramAllowedOnPrivateOrPublic();
+
+            if (FirewallBlocksInterShare)
+            {
+                await FirewallChecker.StartBackgroundWatchUntilAllowed(
+                    onAllowed: () =>
+                    {
+                        _uiContext.Post(_ => FirewallBlocksInterShare = false, null);
+                    },
+                    pollInterval: TimeSpan.FromSeconds(2)
+                );
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(exception);
         }
     }
 
@@ -61,11 +85,11 @@ public partial class MainViewModel : ViewModelBase
     {
         _uiContext.Post(_ =>
         {
-            BluetoothEnabled = _bluetoothRadio.State == RadioState.On;
+            BluetoothEnabled = _bluetoothRadio?.State == RadioState.On;
 
             if (BluetoothEnabled)
             {
-                _nearbyServer.Start();
+                _nearbyServer?.Start();
             }
             else
             {
@@ -115,7 +139,7 @@ public partial class MainViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public async Task SendFolder()
+    private async Task SendFolder()
     {
         var picker = new FolderPicker
         {
@@ -154,7 +178,7 @@ public partial class MainViewModel : ViewModelBase
             if (bitmap != null)
             {
                 using var storageItemStream = await bitmap.OpenReadAsync();
-                var tempFile = System.IO.Path.Combine(System.IO.Path.GetTempPath(), Guid.NewGuid() + ".png");
+                var tempFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".png");
                 await using var fileStream = File.OpenWrite(tempFile);
                 await storageItemStream.AsStreamForRead().CopyToAsync(fileStream);
 

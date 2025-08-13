@@ -47,7 +47,7 @@ namespace InterShareWindows
         public static T GetService<T>()
             where T : class
         {
-            if ((App.Current as App)!._host.Services.GetService(typeof(T)) is not T service)
+            if ((Current as App)!._host.Services.GetService(typeof(T)) is not T service)
             {
                 throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.");
             }

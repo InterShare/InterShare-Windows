@@ -11,8 +11,8 @@ public class DeviceTypeToVisibilityConverter : IValueConverter
         if (value == null || parameter == null)
             return Visibility.Collapsed;
         
-        string deviceType = value.ToString();
-        string targetDeviceType = parameter.ToString();
+        var deviceType = value.ToString();
+        var targetDeviceType = parameter.ToString();
 
         return deviceType.Equals(targetDeviceType, StringComparison.OrdinalIgnoreCase) ? Visibility.Visible : Visibility.Collapsed;
 

@@ -35,7 +35,7 @@ public sealed partial class CustomProgressRing : UserControl
 
     public CustomProgressRing()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -59,12 +59,12 @@ public sealed partial class CustomProgressRing : UserControl
         // Ensure the value is between 0 and 100
         value = Math.Clamp(value, 0.0, 100.0);
 
-        double angle = (value / 100.0) * 360.0;
-        double radians = (angle - 90) * Math.PI / 180.0;
+        var angle = (value / 100.0) * 360.0;
+        var radians = (angle - 90) * Math.PI / 180.0;
 
-        double radius = RootGrid.ActualWidth / 2;
-        Point centerPoint = new Point(radius, radius);
-        Point endPoint = new Point(
+        var radius = RootGrid.ActualWidth / 2;
+        var centerPoint = new Point(radius, radius);
+        var endPoint = new Point(
             radius + radius * Math.Cos(radians),
             radius + radius * Math.Sin(radians)
         );
