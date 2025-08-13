@@ -99,7 +99,6 @@ public class NearbyService : NearbyConnectionDelegate, ReceiveProgressDelegate
 
     private async void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
     {
-        await sender.RemoveByIdAsync(_notificationId);
         // await Task.Delay(500);
 
         if (args.Arguments.ContainsKey("action"))
